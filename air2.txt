@@ -1,0 +1,72 @@
+================================================================
+Title                   : Air2, official AirQuake level
+Date                    : 11/9/97
+Filename                : air2.bsp (inside pak0.pak of AirQuake)
+Author                  : Iikka "Fingers" Ker„nen
+                          ("„" is an "a-with-two-dots"... "&auml;" in html)
+Email Address           : ikeranen@raita.oulu.fi
+Home Page               : www.planetquake.com/ikq/ (visit there!)
+Snail Mail Address      : Iikka ker„nen
+(send me your money!-)    Kiiskitie 4
+                          FIN-93400 Taivalkoski
+                          Finland
+Description             : This is the second full map for AirQuake. It
+                          contains two outdoor areas with air bases, and
+                          a cave system between them.
+
+                          Your single player mission:
+                          Enemies are attacking by air and ground forces,
+                          you are to prevent destruction of your HQ. After
+                          you have taken out the attackers, you are to
+                          launch a counterattack and destroy the enemy base,
+                          and all their military units. It's pretty hard. :)
+
+Additional Credits to   : ID and who ever created Quest
+                          But some discredits to the author of Quest
+                          for making it incompatible with my video card
+                          without univbe. (The 1.091 worked fine!!)
+
+================================================================
+
+* Play Information *
+
+REQUIRES AirQuake.
+
+Single Player           : Yes.
+Cooperative             : Yes.
+Deathmatch              : Yes, teamplay recommended.
+Difficulty Settings     : Normal AirQuake settings. (lives depend on diff.lvl)
+New Sounds              : No
+New Graphics            : Yes, all new textures except for the water.
+New Music               : No
+Demos Replaced          : Probably in AirQuake pack..
+
+* Construction *
+
+Base                    : New level from scratch
+Editor(s) used          : Quest 1.1
+                          Qube Qbsp
+                          My own modified Qube Light
+Known Bugs              : Should be none...
+Build Time              : A long time.
+
+Texture Wad used        : Airquake.wad
+
+Compile machine         : P150 with 48M (DOS) 
+QBSP Time               : abt. 10 min
+Light Time (extra)      : abt. 30 min
+VIS Time (level 4)      : abt. 4 hours
+Brushes                 : around 800?
+Entities                : dunno
+Models                  : About four (airstrips and HQ's).
+
+* Other Info *
+
+Requires AirQuake TC.
+
+* Copyright / Permissions *
+
+You may not distribute this level separately from AirQuake TC. Read
+airquake.txt for more information.
+
+* You really did read this far? *

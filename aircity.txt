@@ -1,0 +1,74 @@
+================================================================
+Title                   : Aircity, official AirQuake level
+Date                    : 10/6/97
+Filename                : aircity.bsp (inside pak0.pak of AirQuake)
+Author                  : Iikka "Fingers" Ker„nen
+                          ("„" is an "a-with-two-dots"... "&auml;" in html)
+Email Address           : ikeranen@raita.oulu.fi
+Home Page               : www.planetquake.com/ikq/ (visit there!)
+Snail Mail Address      : Iikka ker„nen
+(send me your money!-)    Kiiskitie 4
+                          FIN-93400 Taivalkoski
+                          Finland
+Description             : This is the third full map for AirQuake. Its theme
+                          is a city, with two bases on opposite sides, a
+                          river running through, three bridges over the river,
+                          and a subway going under it... Designed for ground
+                          vehicles and helicopters only!
+
+                          Now has a single player mission: Penetrate the
+                          enemy ground defences and kidnap their leader. :)
+                          He's placed in the base opposite side of the city.
+                          Drive to him and stop your engines to pick him up.
+                          Then return to your HQ. The enemies have both air
+                          and ground forces on your way, and it is not an
+                          easy mission. (I don't do it every time with the
+                          humvee :)
+
+Additional Credits to   : ID and who ever created Quest
+                          But some discredits to the author of Quest
+                          for making it incompatible to my video card
+                          without univbe. (The 1.091 worked fine!!)
+
+================================================================
+
+* Play Information *
+
+Single Player           : Yes.
+Cooperative             : Not at the moment.
+Deathmatch              : Yes, teamplay recommended.
+Difficulty Settings     : No
+New Sounds              : No
+New Graphics            : Mostly new textures.
+New Music               : No
+Demos Replaced          : Probably in AirQuake pack..
+
+* Construction *
+
+Base                    : New level from scratch
+Editor(s) used          : Quest 1.1
+                          Qube Qbsp
+                          My own modified Qube Light
+Known Bugs              : No.
+Build Time              : A long time.
+
+Texture Wad used        : airquake.wad
+
+Compile machine         : P150 with 48M (DOS) 
+QBSP Time               : abt. 5 min
+Light Time (extra)      : abt. 10 min
+VIS Time (level 4)      : 5 hours
+Brushes                 : around 400
+Entities                : dunno
+Models                  : Dozens. (fences, bridges, helipads..)
+
+* Other Info *
+
+Requires AirQuake TC test 21 or later.
+
+* Copyright / Permissions *
+
+You may not distribute this level separately from AirQuake TC. Read
+airquake.txt for more information.
+
+* You really did read this far? *
