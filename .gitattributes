@@ -2,6 +2,9 @@
 
 *.qc linguist-language=C
 
+# Map textures
+*.wad filter=lfs diff=lfs merge=lfs -text
+
 # Demos
 *.dem filter=lfs diff=lfs merge=lfs -text
 
