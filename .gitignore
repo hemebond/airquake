@@ -4,10 +4,12 @@
 *.dat
 *.lno
 
-# Compiled maps
+# Map files
 *.bsp
-
 autosave
+
+# Compiled files
+*.pak
 
 config.cfg
 

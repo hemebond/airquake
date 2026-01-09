@@ -1,3 +1,0 @@
-cd ..
-q95 -game airquake %1 %2 %3 %4 %5 %6 %7 %8
-cd airquake
