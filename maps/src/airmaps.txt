@@ -1,0 +1,12 @@
+AIRMAPS.ZIP: AirQuake .map files.
+
+These files are released only to help developing AirQuake levels. You may not
+use them for anything else than learning how to make AirQuake entities, and
+copying certain brush groups such as the aircraft carrier into your own
+AirQuake levels.
+
+It is forbidden to distribute this zip elsewhere than on AirQuake homepage:
+http://www.planetquake.com/ikq/airquake.htm and subpages.
+
+Iikka Ker„nen
+ikeranen@raita.oulu.fi

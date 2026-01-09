@@ -1,0 +1,235 @@
+void() gv_tilt =
+{
+  local vector v1, v2, v3, v4;
+  local float l1, l2, l3, l4;
+  local float r1, r2, w1, w2;
+  local entity vehicle;
+
+  vehicle = self.enemy;
+
+  v1 = vehicle.angles_y * '0 1 0';
+  makevectors(v1);
+
+  v1 = vehicle.origin + (8 * v_forward) - (8 * v_right);
+  v2 = vehicle.origin + (8 * v_forward) + (8 * v_right);
+  v3 = vehicle.origin - (8 * v_forward) - (8 * v_right);
+  v4 = vehicle.origin - (8 * v_forward) + (8 * v_right);
+
+  traceline (v1 - 16 * v_up, v1 - 80 * v_up, TRUE, vehicle);
+  l1 = trace_fraction;
+  traceline (v2 - 16 * v_up, v2 - 80 * v_up, TRUE, vehicle);
+  l2 = trace_fraction;
+  traceline (v3 - 16 * v_up, v3 - 80 * v_up, TRUE, vehicle);
+  l3 = trace_fraction;
+  traceline (v4 - 16 * v_up, v4 - 80 * v_up, TRUE, vehicle);
+  l4 = trace_fraction;
+
+  if (l1 == 1)
+    if (l2 == 1)
+      if (l3 == 1)
+        if (l4 == 1)
+        {
+          if (vehicle.angles_x > 0 && vehicle.angles_x < 180)
+            vehicle.angles_x = vehicle.angles_x - 5;
+          return;
+        }
+
+  r1 = l1 - l2 + l3 - l4;
+  r2 = l1 - l3 + l2 - l4;
+
+  v1 = '0 0.5 0';
+  v1_x = r1;
+  v1_z = r2;
+  v1 = normalize(v1);
+
+  v2_x = v1_x;
+  v2_y = v1_z;
+  v2_z = v1_y;
+
+  v3 = v_up * v2_z + v_forward * v2_y - v_right * v2_x;
+  v3 = normalize (v3);
+
+  if (!w1)
+  {
+    w2 = (4 - l1 - l2 -l3 -l4) * 64;
+    if (w2 > w1)
+      w1 = w2;
+  }
+
+  makevectors(vehicle.angles);
+
+  v2 = vectoangles(v1);
+  v3 = '0 2 0';
+  v3_x = anglemod(0 - v2_x);
+  v3_y = vehicle.angles_y;
+  v3_z = anglemod(v2_y - 90);
+
+  v4 = v3 - vehicle.angles;
+  l1 = anglemod(v4_x);
+  if (l1 > 180)
+    l1 = l1 - 360;
+  l2 = anglemod(v4_z);
+  if (l2 > 180)
+    l2 = l2 - 360;
+
+//  l1 = l1 * 0.2;
+//  l2 = l2 * 0.2;
+
+  vehicle.avelocity_x = l1 * 4;
+  vehicle.avelocity_z = l2 * 4;
+};                      
+
+void (vector v0, float sp_x, float sp_y) Turn_groundveh =
+{
+  local entity stemp;
+  local vector v1,v2,v3;
+  local float f1,f2;
+
+  stemp = self.enemy;
+
+  v1 = '0 0 0';
+  v1_y = anglemod(v0_y - stemp.angles_y);
+  if (v1_y > 180)   v1_y = v1_y - 360;
+
+  v2_y = 0; //v1_y * 5;
+  if (v1_y < 0) v2_y = 0 - sp_y;
+  if (v1_y > 0) v2_y = sp_y;
+  f1 = fabs(v1_y); f2 = fabs(v2_y) * frametime;
+  if (f1 < f2)
+  {
+    v2_y = 0;
+    stemp.angles_y = v0_y;
+  }
+  else
+    stemp.angles_y = anglemod(stemp.angles_y);
+
+  stemp.avelocity_y = v2_y;
+
+  stemp = self.enemy.oldenemy;
+  if (stemp)
+  {
+    v0_x = v0_x - self.enemy.angles_x;
+    if (v0_x > 180) v0_x = v0_x - 360;
+
+    if (v0_x < -10) v0_x = -10;
+    v1_x = v0_x - stemp.toyview;
+    v2_x = 0; // v1_x * 5;
+    if (v1_x < 0) v2_x = 0 - sp_x;
+    if (v1_x > 0) v2_x = sp_x;
+    f1 = fabs(v1_x); f2 = fabs(v2_x) * frametime;
+    if (f1 < f2)
+    {
+      v2_x = 0;
+      stemp.toyview = v0_x;
+    }
+    else
+      stemp.toyview = stemp.toyview + v2_x * frametime;
+
+    v3 = self.enemy.angles_z * '0 0 1';
+    makevectors(v3);
+    f1 = v_up_z;
+    f2 = v_up_y;
+
+    stemp.angles_x = self.enemy.angles_x + f1 * stemp.toyview;
+    stemp.angles_y = self.enemy.angles_y + f2 * stemp.toyview;
+    stemp.angles_z = self.enemy.angles_z;
+  }
+};
+
+void (float sp_x, float sp_y) Steer_groundveh =
+{
+  local entity stemp;
+  local vector v0;
+  local float tmp;
+
+  stemp = self.enemy;
+
+  if (self.waterlevel > 1)
+    T_Damage(stemp,stemp,stemp,1000);
+
+  if (stemp.angles_x < -180) stemp.angles_x = stemp.angles_x + 360;
+  if (stemp.angles_x > 180) stemp.angles_x = stemp.angles_x - 360;
+
+  stemp.flags = stemp.flags - (stemp.flags & FL_ONGROUND);
+  if (stemp.health > 0)
+  {
+    v0_x = self.v_angle_x;
+    v0_x = 0 - v0_x;
+
+    if (self.toyview == 0)
+      v0_y = self.v_angle_y;
+    else if (self.toyview == 1)
+      v0_y = anglemod(self.v_angle_y + 90);
+    else if (self.toyview == 2)
+      v0_y = anglemod(self.v_angle_y + 180);
+    else if (self.toyview == 3)
+      v0_y = anglemod(self.v_angle_y + 270);
+    else if (self.toyview == 4)
+      v0_y = stemp.angles_y;
+
+    if (!self.flags & FL_ONGROUND)
+      v0_y = stemp.angles_y;
+    Turn_groundveh (v0, sp_x, sp_y);
+  }
+  gv_tilt ();
+  tmp = stemp.health * 100 / stemp.max_health;
+  if (tmp<1) tmp=1;
+  if (tmp<self.health)
+    self.dmg_take = self.health - tmp;
+  self.health = tmp;
+
+  setorigin(self.enemy, self.origin);
+  if (self.enemy.oldenemy)
+    setorigin(self.enemy.oldenemy, self.origin);
+};
+
+vector(float minim, float maxdist) GV_aim =
+{
+  local entity e, re;
+  local float f1,f2,flg;
+  local vector v1,v2,org;
+
+  flg = 0;
+  if (maxdist < 0)
+  {
+    flg = flg + 1;
+    maxdist = 0 - maxdist;
+  }
+
+  re = world;
+  f2 = minim;
+  makevectors (self.enemy.oldenemy.angles);
+  v1 = v_forward;
+  v1_z = 0 - v1_z;
+  e = findradius (self.enemy.origin, maxdist);
+  while (e)
+  {
+    org = e.origin + (e.mins + e.maxs)*0.5;
+    if (e.health && (e.movetype != MOVETYPE_FLY || (flg & 1) == 0 ) )
+    {
+      traceline (org, self.enemy.origin, TRUE, world);
+      if (e.model == "progs/plane3.mdl")
+        if (e.skin == 1 && random() < 0.5)
+          trace_fraction = 0;
+      if (trace_fraction == 1)
+      {
+        v2 = normalize (org - self.enemy.origin);
+        f1 = v1 * v2;
+        if (f1 > f2)
+        {
+          f2 = f1;
+          re = e;
+        }
+      }
+    }
+    e = e.chain;
+  }
+
+  if (re != world)
+  {
+    org = re.origin + (re.mins + re.maxs)*0.5;
+    v1 = normalize (org - self.enemy.origin);  
+  }
+  self.enemy.trigger_field = re;
+  return (v1);
+};

@@ -1,0 +1,278 @@
+This text contains entity specs & stuff for AirQuake maps.
+
+Don't send me your stuff as email attachments Instead, upload them to the
+net and tell me where to get them.
+
+*MAPS
+
+When making maps, you can upload them to:
+ftp://ftp.cdrom.com/pub/idgames2/incoming/
+(Just like any other Quake levels). Please tell me when you do, so I can
+check out your work and probably advertise on AirQuake page. When uploading
+AirQuake levels, you have to also upload a text file that clearly says the
+level is for AirQuake...
+
+Architectural recommendations:
+ - 128 units is the minimum width/height of a tunnel you can fly through, and
+   you can have curves in it... Nobody likes these though.
+ - Keep the scale pretty big. You need around 384 units of space to turn
+   around, and more if you use the afterburner. So, about 512 units (I like
+   numbers like that..) should be the minimum horizontal size of places
+   where the planes need to turn. (ie. practically any place. One-way tunnels
+   are not fun in DM)
+ - A "room" 3000-4000 units across is around the maximum you can get without
+   greyflash, unless you use a lot of water and sky. (which sucks in GL)
+ - The Quake map size limits are from -4096 to 4096 in x,y,z coordinates.
+ - Try to avoid really huge open areas. My test map (Air1) runs very slow
+   in some places, and especially when there are some particle explosions
+   going on.
+ - Try R_DRAWFLAT 1 to see what qbsp does to huge, yet simple walls... That
+   explains the slowness. What I'd like to see, is a system of large but not
+   too huge underground caves and outdoor areas, with some buildings etc,
+   and everything connected by curved tunnels to avoid grayflash. 
+
+Entity specs:
+
+PLAYER VEHICLES (info_player_XXX)    
+  The vehicles use normal player starts. Make the aircraft starts in air,
+  pointing away from nearest walls to avoid crashing at the start... The
+  model I use for these is progs/plane1.mdl. You can also make the planes
+  start on a runway by just placing the start's origin about 32 pixels
+  above the runway. Ground vehicles always start on ground below the info_
+  entity. (Place them the same 32 pixels above the ground)
+
+  You can set the "sounds" field to set a vehicle type:
+  Sounds 1:   Dogfighter  (air)
+         2:   Fighter Bomber  (air)
+         4:   Stealth Fighter (air)
+         8:   A-10 (air)
+         16:  X-29 (air)
+         32:  Helicopter (air)
+         64:  Mobile SAM (ground)
+         128: Battle Tank (ground)
+         256: Armoured Car (ground)
+         512: Hovercraft (ground/low-altitude)
+  Add these numbers together to allow multiple vehicle types. If you make
+  a start with no type set, its type will be 1023 allowing all vehicles.
+
+  If you make a player start with a type, a player who has selected that
+  vehicle type will start at that spot. If the player has not selected any
+  vehicle, and there's a starting spot with no type set, he will not start
+  until he selects a vehicle. If there are several starts with a type set,
+  but no style-less one, he has to select one of the allowed vehicles. And
+  finally, if there's only one vehicle type available, the player will
+  always be that type (no need to select it). Complicated?-)
+
+  If all your starts are on a runway, you don't need to care about these
+  things at all, but it's a nice effect to do something like I have in
+  Aircity map... Ground vehicles starting in a garage, and the helicopter
+  on a helipad.
+
+  In teamplay maps, set the "team" field to "1" to make it a start for the
+  blue team, and "team" "2" for red (brown) team.
+
+AMMO CRATES (item_shells, item_spikes, item_rockets, item_cells)
+  Ammo crates float in air, making them possible to collect with aircraft.
+  Their models are now centered around the origin point.
+  item_shells = 8 cannon shells or rockets
+  item_spikes = 50 Ammo for chaingun / autocannon
+  item_rockets = 4 Missiles (Sidewinders / Stingers / SAMs)
+  item_cells = 20 Cells for plasma cannon
+  item_canshells = 20 Cannon shells for tank
+  item_mavericks = 2 Mavericks / Hellfires / AMRAAMs (!)
+  item_bombs = 2 Bombs for A-10 or Fighter Bomber or Armoured Car.
+  item_mines = 3 Mines for Armoured Car
+The model for all these is progs/box1.mdl, except:
+Mavericks:  progs/imaver.mdl
+Bombs:      progs/bomb.mdl
+Mines:      progs/mine.mdl
+
+HEALTH BOX (item_health)
+  Gives a damaged vehicle 25% health. Floats in the air like ammo crates, and
+  uses the same box model..
+
+DRONE PLANES (monster_drone)
+  Drones fly around their routes. Make their flying paths in the same
+  way as for normal monsters and func_trains (ie. path_corners linked).
+  The current model for drone planes is progs/plane1.mdl. Don't make the
+  path go through too narrow openings. It's hard enough for human people
+  to fly through those, how can you expect a BLIND thing be able to do it?
+
+AI PLANES (monster_drone2)     
+  These work like drones, but can attack enemies. The attacks are based on
+  path_corners. (another complicated explanation:)
+  - Add "noise" field to the drone, for example: "noise" "plane_1".
+  - Make lots of path_corners that can see each other as well as the
+    plane's patrol route. Use the same "noise" name as for the drone.
+  Now, when the plane sees an enemy, it finds the path_corner closest to
+  the target and moves there. If it gets close enough, it opens fire. Don't
+  make possible attack paths go through narrow openings or close to walls;
+  basically these planes only work in open areas like air3. You can set the
+  plane type by setting "sounds" field to 1-5. These planes will also have
+  ability to bomb ground targets later... I haven't decided the way to do
+  it yet.
+
+HELICOPTERS (monster_helo)
+  These work like normal flying monsters. You can set up a flying path for
+  them, or just put them in to wait for the player. They attack the player
+  using autocannons, rockets, and missiles, depending on the range. They
+  can also follow you around buildings etc, sometimes they don't follow, but
+  instead circle around the obstacle and pop up ahead of you. It's very cool
+  effect if the level is well built.
+
+TANKS (monster_etank)
+  This is an enemy tank. Currently it only uses plasma cannons... I'll very
+  likely add a few missiles against air targets later. The enemy tanks are
+  a lot easier to kill than your tank. (Unless you set its health in the
+  map file to higher value)
+
+MOBILE SAMS (monster_emsam)
+  Like the enemy tank above, but imitates the mobile SAM available to players.
+  Has 4 missiles by default, can be set up by adding "ammo_rockets" field.
+  Uses autocannon when run out of missiles... 
+
+HUMVEES (monster_ehmmv)
+  Like the player humvee... Always drives along its route, and shoots you
+  with stingers if you get too close. It has 8 missiles by default, can be
+  set up by adding "ammo_rockets" field. Uses autocannon when run out of
+  missiles... As deadly as the player equivalent (beware! :)
+
+DUMMY AIRCRAFT (monster_dummycraft)
+  This is a fake aircraft or helicopter. You can use these as decorations in
+  air bases. You can set their health (default 100), and when killed, they
+  explode like player aircraft. Don't do too big chain reactions with these,
+  it slows the game down a lot. Set the "style" field to set the vehicle type
+  for dummy...
+
+SAM LAUNCHERS (monster_sam)
+  SAM launchers have a static base, and two rotating tubes that shoot
+  homing missiles. It can shoot about once per 2 seconds. If you fly
+  in front of the SAM launcher, or very near to it, it starts to
+  shoot at you. If you are destroyed, or get into place where the SAM
+  can't see you anymore, it "forgets" you and returns to its original
+  direction. Make a "SAM site" of three launchers, looking to all
+  directions, to get the maximum effect. SAM launcher uses two models:
+  progs/samba.mdl for the base, and progs/samtb.mdl for the barrels.
+  I use the latter in my editor, because it shows the direction better.
+  By default, SAM launchers have 4 missiles each, but you can set it
+  by adding "ammo_rockets" field for the entity in your .map file.
+
+ANTI-AIRCRAFT GUNS (monster_aag)
+  AA guns work in the same way as SAM launchers, except they shoot plasma
+  balls. They can be rather effective especially in tight places. Shoots
+  two times per second, and has practically unlimited ammo by default; set
+  the "ammo_cells" field if you want to change this. AA gun uses models
+  "progs/aagba.mdl" and "progs/aagtb.mdl". Use spawnflags value &2 to make
+  the plasma balls explode ("flak") around the target... (It's timed by
+  the lead-calculating routine to explode when it should hit you)
+
+RADARS (monster_rad)   
+  This is a standard radar. It can see 3 times longer than other "monsters",
+  and can assign enemies as targets for SAM launchers and AA turrets. It
+  also tells teammates when it detects enemies and gives rough direction.
+  A typical radar message could be:
+  Radar: Enemy Fighter Bomber (Fingers) in north low.
+  The only thing you need to care about is placing the radar in the level,
+  it's networked to all friendly defense systems automatically. Oh yes,
+  the radar doesn't see stealth fighters when they are "stealthed".
+
+EXPLODING BRUSHES (func_xwall)
+  Works like func_wall, except you can destroy it. If you don't set the
+  amount of health in the .map file, it's 300 points (requires 4 rockets
+  to kill). If you set the "dmg" field, the explosion will cause damage
+  to nearby entities (Use for oil tanks..). Set the "sounds" field to a
+  non-zero value to make missiles lock into it. (Off by default since
+  you probably wouldn't like to shoot an environmental building or fence
+  etc instead of an enemy tank next to it... Also makes it possible to
+  make "hidden" xwalls like the two in AirCity bases.)
+
+MINES (trap_mine)
+  This is a standard land mine. Don't step on it. 
+
+LEVEL EXITS (trigger_changelevel)
+  Now this actually works in AirQuake. I managed to make it use changelevel
+  instead of map command. There are some special stuff for exits in the
+  OTHER section below.
+
+RUNWAYS (func_runway)
+  Simply make a helipad or airstrip or parking lot from brushes, and put them
+  into a func_runway entity. Then you can land on it. Just keep it level!
+  Set "health" field to make it possible to destroy the runway. Don't make
+  whole runways destructable, always keep some asphalt under plane starts
+  and hangars.
+
+REPAIR SPOTS (trigger_rearm)
+  This is a trigger that works a bit like trigger_hurt, except it gives ammo
+  and health to whoever touches it. Also lets the player to change to a
+  different vehicle without loss of frags.
+
+PICKUP PEOPLE (item_flagsoldier)
+  This is an "enemy officer" to be picked up in teamplay DM. Set the team
+  field according to what team it belongs in. Now these can be used in
+  single player game as well. Set the "value" field to make it a mission
+  target. "netname" can be used to make it something else than enemy
+  officer. (Not fully tested yet)
+
+AIRPORT CONTROL (info_control, trigger_toffrunway, trigger_landrunway)
+  Airport control is a damn complicated system that can communicate with
+  players via impulse commands... Here's how you can use it in your maps.
+
+  Make an entity "info_control", that is an invisible and invincible entity
+  that handles the communications. It should be physically placed for example
+  atop a control tower, as it'll probably work as a sound source some day
+  (alert sounds..)
+
+  Make two triggers above the runways, called "trigger_toffrunway" and
+  "trigger_landrunway". The "toffrunway" is for the runway used for taking
+  off etc... These are necessary to let the control tower know if there's
+  something on the runway.
+
+  info_control fields:
+ - "netname": set this to something like "HQ" or "Tower" or "Bridge". This
+   is where the messages come from. ("Tower: Cleared for take-off"..)
+ - "team": set to 1 or 2 to make it reply to either team's players.
+ - "message": Write here a short mission briefing for the players. (optional)
+ - "target": This has to match the "targetname" of the physical control tower
+   or other building. In most editors, simply "link" info_control to the
+   func_xwall that is the building. (optional)
+ - "targetname": Match to the "target" of the runway triggers.
+
+  trigger_toffrunway and trigger_landrunway:
+ - "target": Match to the "targetname" of info_control.
+
+DECORATIONS
+  - A new street light is called "light_street", see Aircity map. Its model is
+    progs/lamp.mdl
+
+OTHER
+  If your map has a constant sky level, place an entity named "info_sky"
+  about 64 units below it. This prevents people from crashing into sky. :)
+
+  Additionally, you can use entities "info_mins" and "info_maxs" to define
+  the minimum and maximum coordinates you can move to. It's recommended to
+  put these in after the map is otherwise finished, so you can use qbsp with
+  "-onlyents" parameter and don't need to care about the mins being below
+  the ground etc. These may be usable in maps that have walls made of sky
+  brushes to reduce grayflash. Info_mins and info_maxs should be placed at
+  least 64 units away from those walls to prevent crashing.
+
+  To make reasonable single-player missions, you can set "value" field to
+  all entities the player has to destroy. The "value" of the exit brush
+  tells how many of the enemies has to be killed before the exit works.
+  For example, if the mission is "Kill at least two of three AA guns", you
+  set the value of each gun to 1, and the value of exit to 2. This way you
+  can also make some targets have more priority than others (by making
+  higher "value"), and if a friendly target has value, you have to protect
+  it. In teamplay DM, the value is turned to frags when you destroy a
+  valuable target of the other team.
+
+  To make "monsters" your teammates, set their "team" field to 1. Then they
+  will attack enemies if they can, and enemies will attack them. If you
+  shoot at a teammate, it gets angry and tries to kill you... In teamplay
+  DM maps, team 1 is the blue team, and team 2 is the red. Team 0 monsters
+  are REMOVED in DM mode. (To make it easier to make maps for both single
+  player and teamDM modes)
+
+  You can set the "wait" field to set how many seconds it will take for
+  an entity to respawn in deathmatch. This includes exploding walls,
+  runways, AA turrets, SAM launchers and Radars.
