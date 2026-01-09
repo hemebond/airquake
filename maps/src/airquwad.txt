@@ -1,0 +1,12 @@
+This is the AirQuake texture wad by Iikka Ker„nen, 1997.
+Updated 10/7/1997 (2nd release)
+
+You may only use these textures in AirQuake levels, and only if you release
+the levels as freeware or they are included in official AirQuake package.
+Most of the textures included are my sole property, and some are modified
+from works of ID software. You may only distribute this wad on non-commercial
+media (Internet and BBS's).
+
+Currently in:
+- All textures used in Aircity.bsp; brick walls, asphalt, sky, water, rock.
+- All textures used in other levels too. (ship textures & some metals added)
