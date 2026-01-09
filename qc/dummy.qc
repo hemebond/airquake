@@ -31,17 +31,17 @@ void() monster_dummycraft =
   }
 
   if (self.style == 1)
-    setmodel (self, "newmedia/f16.md2");
+    setmodel (self, "progs/plane1.mdl");
   else if (self.style == 2)
-    setmodel (self, "newmedia/f18.md2");
+    setmodel (self, "progs/plane2.mdl");
   else if (self.style == 3)
-    setmodel (self, "newmedia/f117.md2");
+    setmodel (self, "progs/plane3.mdl");
   else if (self.style == 4)
-    setmodel (self, "newmedia/a10.md2");
+    setmodel (self, "progs/plane4.mdl");
   else if (self.style == 5)
-    setmodel (self, "newmedia/f22.md2");
+    setmodel (self, "progs/plane5.mdl");
   else if (self.style == 6)
-    setmodel (self, "newmedia/helo.md2");
+    setmodel (self, "progs/helo1.mdl");
 
   setsize (self, '-16 -16 -16', '16 16 16');
   self.netname = "a plane";

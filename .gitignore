@@ -6,3 +6,9 @@
 
 # Compiled maps
 *.bsp
+
+autosave
+
+config.cfg
+
+.bak/

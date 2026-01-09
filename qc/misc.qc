@@ -130,12 +130,8 @@ Default style is 0
 */
 void() light_globe =
 {
-	//precache_model ("progs/s_light.spr");
-	//setmodel (self, "progs/s_light.spr");
-
-	precache_model ("progs/flare.spr");
-	setmodel (self, "progs/flare.spr");
-	self.alpha = 0.5;
+	precache_model ("progs/s_light.spr");
+	setmodel (self, "progs/s_light.spr");
 	makestatic (self);
 };
 
@@ -144,18 +140,8 @@ street light from da old times...
 */
 void() light_street =
 {
-  local entity fla;//Tei
-
   precache_model ("progs/lamp.mdl");
   setmodel (self, "progs/lamp.mdl");
- 
-  //Tei	
-  fla = spawn();
-  setorigin( fla, self.origin + '0 0 8');
-  setmodel( fla, "progs/bigflare.spr");
-  makestatic (fla);
-  //Tei
-
   self.solid = SOLID_BBOX;
   if (!self.spawnflags & 16)
     setsize(self, '-8 -8 -64', '8 8 8');

@@ -10,10 +10,6 @@ void() gv1_steer =
   tmp=floor(tmp);
   if (tmp > 8) tmp = 8;
 
-  //if(self.enemy.speed>110)
-	//  CopterSparks(veh);
-
-
   if (time > self.fly_sound || veh.impulse != tmp)
   {
     if (tmp == 0)
@@ -181,16 +177,12 @@ void() gv1_currentammo =
   self.ammo_cells = 0;
 
   if (self.weapon == IT_WEP1)
-	//Geapon("auto");//Tei
     self.weaponmodel = "progs/v_auto.mdl";
   else if (self.weapon == IT_WEP2)
-	//Geapon("sam");//Tei
     self.weaponmodel = "progs/v_sam.mdl";
   else if (self.weapon == IT_WEP3)
-	//Geapon("none");//Tei
     self.weaponmodel = "";
   else if (self.weapon == IT_WEP4)
-	//Geapon("none");//Tei
     self.weaponmodel = "";
 };
 
@@ -203,11 +195,7 @@ void() start_groundveh1 =
 
   // Create the veh -> self.enemy
   e = spawn();
-
-  //setmodel (e, "progs/msamba.mdl");
-  setmodel (e, "newmedia/msam.md2"); //Tei
-
-
+  setmodel (e, "progs/msamba.mdl");
   e2 = self.goalentity;  // This is the info_player_* you spawned on.
   setorigin(self, e2.origin);
   setorigin(e, e2.origin);
@@ -238,9 +226,7 @@ void() start_groundveh1 =
   // Create the missile tubes
   // == vehicle.oldenemy
   e = spawn();
-  // setmodel (e, "progs/msamtb.mdl");
-  setmodel (e, "newmedia/msamturret.md2");//Tei
-
+  setmodel (e, "progs/msamtb.mdl");
   setorigin (e, self.enemy.origin);
   e.owner = self;
   self.enemy.oldenemy = e;

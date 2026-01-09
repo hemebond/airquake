@@ -1,0 +1,155 @@
+@SolidClass = worldspawn : "World entity"
+[
+	message(string) : "Text on entering the world"
+	worldtype(choices) : "Ambience" : 0 =
+	[
+		0 : "Medieval"
+		1 : "Metal (runic)"
+		2 : "Base"
+	]
+	sounds(integer) : "CD track to play" : 0
+	light(integer) : "Ambient light"
+
+//-------- World Lighting Options  --------
+
+	_minlight(integer) : "Ambient Light" :  : "Set a global minimum light level(Default 0). While this can help light completey black areas of your map, it can also have unwanted side affects(lost contrast) globally on all of your lights/shadows. Use with caution."
+	_minlight_color(color255) : "Ambient Light Color" :  : "Sets the global minimum light color. Default white(255 255 255)."
+	_minlight_dirt(choices) : "Ambient Light Dirt(AO)" :  : "1 enables dirtmapping (ambient occlusion) on minlight lit surfaces, -1 to disable. Default is to use the value of '_dirt'." = [
+        -1 : "Disabled"
+         0 : "Default"
+         1 : "Enabled"
+    ]
+	_range(integer) : "Global Light Range" :  : "Scales the brightness range of all lights without affecting their fade distance. Values more than 0.5 makes lights brighter and values less than 0.5 makes lights less bright. The same effect can be achieved on individual lights by adjusting both the 'light' and 'wait' attributes."
+	_dist(integer) : "Global Light Scale" :  : "Scales the fade distance of all lights by a factor of 'n'. If 'n' is more than 1 lights fade more quickly with distance and if 'n' is less than 1, lights fade more slowly with distance and the light reaches further."
+	_gamma(integer) : "Lightmap gamma" :  : "Adjust brightness of the final lightmap. Default 1, >1 is brighter, <1 is darker."
+	_spotlightautofalloff(integer) : "Spotlight Falloff" :  : "When set to 1, spotlight falloff is calculated from the distance to the targeted 'info_null'. Ignored when '_falloff' is not 0. Default 0."
+
+//-------- SUN options --------
+
+	_sunlight(integer) : "Sunlight" :  : "Set the brightness of the sunlight coming from an unseen sun in the sky. Sky brushes, or more accurately bsp leafs with sky contents, will emit sunlight at an angle specified by the '_sunlight_mangle' key. Default 0."
+	_sunlight_color(color255) : "Sunlight Color" :  : "Specify the red(r), green(g) and blue(b) components for the colour of the sunlight. Default is white(255 255 255)."
+	_sunlight_mangle(string) : "Sunlight Direction" :  : "Specifies the direction of sunlight using yaw(x), pitch(y) and roll(z) in degrees. Yaw specifies the angle around the Z-axis from 0 to 359 degrees, in a counter clockwise rotation. Looking top down(top=X/Y) in the editor, a yaw value of 1/359 is effectively placing the Sun's starting position at 9:00 A.M. Pitch specifies the angle from 90 'straight up' to -90 'straight down'. Roll has no effect(use 0). Default is straight down (0 -90 0)."
+	_anglescale(integer) : "Sunlight Angle Scale" :  : "Sets a scaling factor for how much influence, the angle of incidence, sunlight has on the brightness of a surface. Values must be between '0.0' and '1.0'. Smaller values mean less attenuation, with zero meaning that angle of incidence has no effect at all on the brightness. Default 0.5"
+	_sunlight_dirt(choices) : "Sunlight Dirt" :  : "1 enables dirtmapping (ambient occlusion) on sunlight, -1 to disable (making it illuminate the dirtmapping shadows). Default is to use the value of '_dirt'." = [
+		-1 : "Disabled"
+		 0 : "Default"
+		 1 : "Enabled"
+	]
+	_sunlight_penumbra(integer) : "Sunlight Penumbra" :  : "Specifies the penumbra width, in degrees, of sunlight. Useful values are 3-4 for a gentle soft edge, or 10-20+ for more diffuse sunlight. Default is 0."
+	_sunlight2(integer) : "Sunlight 2" :  : "Set the brightness of a large dome of lights positioned around the map (16K unit radius). Useful for simulating higly diffused light (e.g. cloudy skies) in outdoor areas (def=0)."
+	_sunlight2_color(color255) : "Sunlight 2 color" :  : "Specifies the color of '_sunlight2', same format as '_sunlight_color'. Default (255 255 255)"
+	_sunlight2_dirt(choices) : "Sunlight 2 dirt" :  : "1 enables dirtmapping (ambient occlusion) on sunlight2, -1 to disable. Default is to use the value of '_dirt'." = [
+		-1 : "Disabled"
+		 0 : "Default"
+		 1 : "Enabled"
+	]
+	_sunlight3(integer) : "Sunlight 3" :  : "Same as _sunlight2, but for the bottom hemisphere, where ambient light is coming from below the horizon. Combine '_sunlight2' and '_sunlight3' to have light coming equally from all directions. Useful in levels with a Sky/Void theme. Default 0."
+	_sunlight3_color(color255) : "Sunlight 3 color" :  : "Specifies the color of '_sunlight3', same format as '_sunlight_color'. Default (255 255 255)"
+
+//-------- Fog Options --------------------
+
+	fog(string) : "Fog Command" :  : "ENGINE only 'console command' for setting fog parameters, Density/R/G/B example = (0.05 0.3 0.3 0.3). NOTE- If you plan to use 'trigger_fog' in your map, be sure to set both INDIVIDUAL 'Fog Density' and 'Fog Colour' values for proper operation."
+	fog_density(integer) : "Fog Density" :  : "Global fog density (def 0.1). NOTE - An Initial value MUST be entered for proper 'trigger_fog' operation."
+	fog_colour(color1) : "Fog Colour" :  : "Initial global fog colour (def 0.1 0.1 0.1). NOTE - An initial value MUST be entered for proper trigger_fog operation."
+	fog_dpextra(string) : "Fog DP Extra" :  : "Extra fog parameters for Darkplaces, (def= 1 0 8192 1024 32)."
+	skyfog_density(integer) : "Sky Fog Density" : : "Trigger skyfog starting density (default = 0.5)"
+
+//-------- Liquid Options --------------------
+
+	water_alpha(string) : "Water Alpha" :  : "Set the transpareny of water (ex .70), which are brushes textured with a water(ex *04water) texture. This setting tranfers directly to the other 'liquid' types and teleporters, UNLESS you are using an engine that supports individual 'alpha's' for each(see below). NOTE - Defaults to the players own 'r_wateralpha' settings if no value is assigned. REQUIRED to be set if you intend to use separate transparencies for other liquid types."
+	lavaalpha(string) : "Lava Alpha" :  : "Set the individual transparency of Lava, brush solids textured with a lava(ex *lava1) texture. Default inherits the 'water_alpha' setting. If 'water_alpha' is not set then it defaults to the players own 'r_wateralpha' setting."
+	slimealpha(string) : "Slime Alpha" :  : "Transparency of Slime, works the same as 'lavaalpha' except for solids textured with a slime(ex *slime0) texture."
+	telealpha(string) : "Teleporter Alpha" :  : "Transparency of Teleporters, works the same as 'lavaalpha' except for solids textured with a teleporter(ex *teleport) texture."
+
+//-------- Ambient Occlusion options -------------
+
+	_dirt(choices) : "Dirt Mapping (AO)" :  : "1 Enables dirtmapping (ambient occlusion) on all lights adding  shadows to corners and crevices. You can override the global setting for specific lights with the '_dirt' key, for point light entities, and the '_sunlight_dirt', '_sunlight2_dirt', '_minlight_dirt' keys, in worldspawn. Default -1, no dirtmapping." = [
+		-1 : "Disabled"
+		 0 : "Default"
+		 1 : "Enabled"
+	]
+	_dirtmode(choices) : "Dirt mode" :  : "Choose between ordered or randomized dirtmapping, default 0" = [
+		 0 : "Ordered (def)"
+		 1 : "Randomized"
+	]
+	_dirtscale(integer) : "Dirt scale" :  : "Scale factor used in dirt calculations. Lower values(ex 0.5) make the dirt fainter while larger values (ex 2.0) would create much darker shadows, default 1."
+	_dirtgain(integer) : "Dirt Gain" :  : "Exponent used in dirt calculation. Lower values(ex 0.5) make the shadows darker and stretch further away from corners, default 1."
+	_dirtdepth(integer) : "Dirt Depth" :  : "Maximum depth of occlusion checking for dirtmapping, default 128."
+	_dirtangle(integer) : "Dirt Angle" :  : "Cone angle in degrees for occlusion testing. Lower values can avoid unwanted dirt on arches, pipes, interiors etc. Allowed range is (x=1->90), default 88."
+
+//-------- Bounce Lighting Options ---------------
+
+    _bounce(choices) : "Bounce Lighting" :  : "1 enables bounce lighting, default 0." = [
+		 0 : "Default"
+		 1 : "Enabled"
+	]
+    _bouncescale(integer) : "Bounce Scale" :  : "Scales the brightness of bounce lighting, default 1."
+    _bouncecolorscale(choices) : "Bounce Color" :  : "Weight for bounce lighting to use texture colors from the map. 0 ignores map textures (default), 1 multiplies bounce light color by texture color." = [
+		 0 : "Default"
+		 1 : "Enabled"
+	]
+    _bouncestyled(choices) : "Bounce Styled Lights" :  : "1 makes styled lights bounce (e.g. flickering or switchable lights), default is 0, they do not bounce." = [
+		 0 : "Default"
+		 1 : "Enabled"
+	]
+]
+
+
+
+@PointClass size(-8 -8 -8, 8 8 8) base(Light, Target, Targetname) model({ "path": ":progs/lamp.mdl" }) =
+	light_street : "A street lamp"
+	[
+		spawnflags(Flags) = [ 1 : "Start off" : 0 ]
+	]
+
+
+
+@PointClass size(-16 -16 -16, 16 16 16) base(Item, Appearflags) model({ "path": ":progs/imaver.mdl" }) =
+	item_mavericks : "AS missiles" []
+@PointClass size(-8 -8 0, 8 8 16) base(Item, Appearflags) model({ "path": ":progs/player.mdl" }) =
+	item_flagsoldier : "Flag Soldier" []
+@PointClass size(-16 -16 -16, 16 16 16) base(Item, Appearflags) model({ "path": ":progs/box1.mdl" }) =
+	item_canshells : "Big Cannon Shells" []
+@PointClass size(-16 -16 -16, 16 16 16) base(Item, Appearflags) model({ "path": ":progs/mine.mdl" }) =
+	item_mines : "Mines" []
+
+
+
+
+@PointClass base(Monster) size(-16 -16 -20, 16 16 16) model({ "path": ":progs/aagba.mdl" }) = monster_aag : "Anti-aircraft gun" []
+@PointClass
+    size(0 0 0, 32 32 56)
+    base(Appearflags)
+    model(
+        {{
+            style == 1 ->   ":newmedia/f18.md2",
+            style == 3 ->   ":newmedia/f117.md2",
+                            ":newmedia/f16.md2"
+        }}
+    ) =
+    monster_drone2 : "monster_drone2" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 8) model({ "path": ":newmedia/tankm1.md2" }) = monster_etank : "etank" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 8) model({ "path": ":progs/msamba.mdl" }) = monster_emsam : "A Tank" []
+@PointClass base(Monster) size(-16 -16 -16, 16 16 16) model({ "path": ":newmedia/apache.md2" }) = monster_helo : "monster_helo" []
+
+
+
+
+@SolidClass base(Appearflags) = func_runway : "Static nonsolid model"  []
+@SolidClass base(Appearflags) = func_xwall : "Static nonsolid model"  []
+
+
+
+
+@SolidClass base(Trigger) = trigger_rearm : "Trigger re-arm" []
+
+
+
+@PointClass color(200 150 150) = info_cutcam : "info_cutcam" []
+@PointClass color(200 150 150) = info_sky : "info_sky" []
+
+
+
+
+
+@include "quake.fgd"

@@ -188,15 +188,6 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 */
   save = targ.armorvalue;
 	take = ceil(damage-save);
-	
-	
-   // Tei
-
-   if (random()<0.2)
-	//InFxEnt( 15, targ,FX_DARKTRAIL);
-
-   // Tei
-
   if (take < 0) take = 0;
 
 // add to the damage total for clients, which will be sent as a single

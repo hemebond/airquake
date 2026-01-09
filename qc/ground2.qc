@@ -10,9 +10,6 @@ void() gv2_steer =
   tmp=floor(tmp);
   if (tmp > 8) tmp = 8;
 
-  //if(self.enemy.speed>95)
-	//  CopterSparks(veh);
- 
   if (time > self.fly_sound || veh.impulse != tmp)
   {
     if (tmp == 0)
@@ -201,9 +198,9 @@ void() gv2_attack =
       v2 = GV_aim(0.97, -10);
       makevectors(v1);
       if (self.ammo_shel & 1)
-        AC_bomb2(self.enemy.origin + v_forward * 10 + v_right * 8, v2 * 900, world);
+        AC_bomb(self.enemy.origin + v_forward * 10 + v_right * 8, v2 * 900, world);
       else
-        AC_bomb2(self.enemy.origin + v_forward * 10 - v_right * 8, v2 * 900, world);
+        AC_bomb(self.enemy.origin + v_forward * 10 - v_right * 8, v2 * 900, world);
       self.enemy.effects = self.enemy.effects | EF_MUZZLEFLASH;
       self.currentammo = self.ammo_rockets = self.ammo_shel = self.ammo_shel - 1;
       self.enemy.show_hostile = time + 1;
@@ -242,16 +239,12 @@ void() gv2_currentammo =
   self.ammo_cells = self.ammo_amsl;
 
   if (self.weapon == IT_WEP1)
-	//Geapon("auto");
     self.weaponmodel = "progs/v_auto.mdl";
   else if (self.weapon == IT_WEP2)
-	//Geapon("plasma");
     self.weaponmodel = "progs/v_plas.mdl";
   else if (self.weapon == IT_WEP3)
-	//Geapon("canon");
     self.weaponmodel = "progs/v_cann.mdl";
   else if (self.weapon == IT_WEP4)
-	//Geapon("sam");
     self.weaponmodel = "progs/v_sam.mdl";
 };
 
@@ -260,15 +253,11 @@ void() start_groundveh2 =
   local entity e, e2;
 
   setsize (self, '-16 -16 -24', '16 16 24');
-  //setsize (self, '-15 -8 -5', '12 6 2');//FIXME!!
-
   self.takedamage = DAMAGE_NO;
 
   // Create the veh -> self.enemy
   e = spawn();
-  //setmodel (e, "progs/tankba.mdl");
-  setmodel (e, "newmedia/tankm1.md2"); //Tei
-
+  setmodel (e, "progs/tankba.mdl");
   e2 = self.goalentity;  // This is the info_player_* you spawned on.
   setorigin(self, e2.origin);
   setorigin(e, e2.origin);
@@ -277,10 +266,7 @@ void() start_groundveh2 =
   e.classname = "tank";
   e.velocity = '0 0 0';
   e.movetype = MOVETYPE_FLY; //NONE;
-  setsize (e, '-16 -16 -24', '16 16 16');//
-
-  //setsize (e, '-15 -8 -5', '12 6 2');//FIXME!!
-
+  setsize (e, '-16 -16 -24', '16 16 16');
   e.solid = SOLID_SLIDEBOX;
   e.health = 600;
   e.max_health = e.health;
@@ -301,10 +287,7 @@ void() start_groundveh2 =
   // Create the gun barrels
   // == vehicle.oldenemy
   e = spawn();
-  //setmodel (e, "progs/tanktb.mdl");
-
-  setmodel (e, "newmedia/gunm1.md2"); // Tei FIXME!!
-
+  setmodel (e, "progs/tanktb.mdl");
   setorigin (e, self.enemy.origin);
   e.owner = self;
   self.enemy.oldenemy = e;
@@ -313,9 +296,7 @@ void() start_groundveh2 =
   // Create the turret
   // == vehicle.movetarget
   e = spawn();
-  //setmodel (e, "progs/tanktr.mdl");
-  setmodel (e, "newmedia/turretm1.md2"); // Tei 
-
+  setmodel (e, "progs/tanktr.mdl");
   setorigin (e, self.enemy.origin);
   e.owner = self;
   self.enemy.movetarget = e;

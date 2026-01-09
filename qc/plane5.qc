@@ -6,16 +6,12 @@ void() ac5_currentammo =
   self.ammo_cells = self.ammo_amsl;
 
   if (self.weapon == IT_WEP1)
-	  //Geapon("auto");
     self.weaponmodel = "progs/v_auto.mdl";
   else if (self.weapon == IT_WEP2)
-	  //Geapon("plasma");
     self.weaponmodel = "progs/v_plas.mdl";
   else if (self.weapon == IT_WEP3)
-	  //Geapon("rockets");
     self.weaponmodel = "progs/v_rock.mdl";
   else if (self.weapon == IT_WEP4)
-	  //Geapon("sider");
     self.weaponmodel = "progs/v_sider.mdl";
 };
 
@@ -29,17 +25,10 @@ void() ac5_steer =
   Steer_plane (105, 105, 150);
   jet_sound();
 
-	/*
   if (self.health < 20 && stemp.model == "progs/plane5.mdl")
     setmodel(stemp, "progs/plane5b.mdl");
   if (self.health >= 20 && stemp.model == "progs/plane5b.mdl")
     setmodel(stemp, "progs/plane5.mdl");
-	*/
-   //Tei
-  //if(stemp.speed>95)
-	//  CopterSparks(stemp);
-  //Tei
-
 
   makevectors(stemp.angles);
   v3 = v_forward;
@@ -57,10 +46,7 @@ void() ac5_steer =
 
       stemp.skin = 1;
       if (!(temp1&4))
-	{
-         //stemp.effects = 4 | EF_BLUEFIRE;
-         //InFxEnt(30,stemp,FX_);//Tei
-	}
+        stemp.effects = 4;
     }
     else
     {
@@ -228,9 +214,7 @@ void() start_aircraft5 =
   // Create the plane
   // self.enemy is your aircraft (or other vehicle?-).
   e = spawn();
-  //setmodel (e, "progs/plane5.mdl");
-  setmodel (e, "newmedia/f22.md2");
-
+  setmodel (e, "progs/plane5.mdl");
 
   e2 = self.goalentity;  // This is the info_player_* you spawned on.
   setorigin(e, e2.origin);

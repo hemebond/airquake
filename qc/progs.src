@@ -1,26 +1,12 @@
 ../progs.dat
 
 defs.qc
-dpextensions.qc
 subs.qc
-
-cujodef.qc
-
-
-fx_engine.qc
-precache.qc
-
-//gui.qc
-
-
-
 airmisc.qc
 fight.qc
 ai.qc
 combat.qc
 //items.qc
-
-
 weapons.qc
 
 acitems.qc
@@ -34,20 +20,11 @@ plane2.qc
 plane3.qc
 plane4.qc
 plane5.qc
-plane6.qc //Tei
-plane7.qc //Tei
-plane8.qc //Tei
-
 helo1.qc
-helo2.qc //Tei
-helo3.qc //Tei
-helo4.qc //Tei
-
 ground1.qc
 ground2.qc
 ground3.qc
 ground4.qc
-ground5.qc //Tei
 
 world.qc
 control.qc
@@ -75,7 +52,3 @@ dummy.qc
 etank.qc
 emsam.qc
 ehmmv.qc
-
-
-cujoai.qc
-cujoimpl.qc

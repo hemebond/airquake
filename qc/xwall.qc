@@ -67,21 +67,6 @@ void() xwall_pieces =
   BecomeExplosion ();
 };
 
-
-// TEi
-vector (vector pos) SearchSolid =
-{
-	local float pc;
-
-	while(pointcontents(pos)==CONTENT_EMPTY)
-	{
-		pos = pos + '0 0 -5';
-	}
-
-	return pos;
-};
-//Tei
-
 void() xwall_boom =
 {
   local vector v;
@@ -104,18 +89,6 @@ void() xwall_boom =
     e.nextthink = time + 0.1;
   }
   xwall_trigger();
-
- //(vector org, vector end, float type, float typelife, float dead, float fxscale, float key ) 
- 
- v = SearchSolid(v);
- //StaticFX( v, v,1,1,666,1.3,666);//type=1,life=1 fire 1
- //StaticFX( v, v,2,1,666,1,666);//type=2,life=1 fire 2
- //FX_ScorchFinal(v + '0 0 8');
- //StaticFX( v, v,7,1,666,3,666);//type=7,life=1 dark
-
-
- //StaticFX( self.origin + '0 0 -20', self.origin, 2,4,143,2,4);
-
 };
 
 void() xwall_die =
@@ -267,26 +240,3 @@ void() func_runway =
 
   runway_start ();
 };
-
-
-// Tei maps support
-
-void () func_nube =
-{
-	self.angles = '0 0 0';
-	self.movetype = MOVETYPE_NONE;
-	self.solid = SOLID_NOT;
-	//self.think = Transient;
-	setmodel (self, self.model);
-	self.mdl = self.model;
-	setsize (self, self.mins, self.maxs);
-	setorigin (self, self.origin);
-	//self.goalpos = self.origin;
-};
-
-void () func_cloud =
-{
-  func_nube();
-};
-
-// Tei maps support

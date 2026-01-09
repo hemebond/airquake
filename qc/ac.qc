@@ -51,16 +51,12 @@ void () Create_chasecam =
   setorigin (e, self.origin);
   self.view_ofs = '0 0 1';
 
-  msg_entity = self;           
-// Camera viewport 2
-	bprint("SEt camera2..hole!\n");
-  //WriteByte (MSG_ONE, 48);//5
-  WriteByte (MSG_ONE, SVC_SETVIEWPORT);
+  msg_entity = self;           // Camera viewport
+  WriteByte (MSG_ONE, 5);      
   WriteEntity (MSG_ONE, e);
   // Turn the camera to the right dir!!
   // (doesn't always work at start?)
-  //WriteByte (MSG_ONE, 10);
-  WriteByte (MSG_ONE, SVC_SETANGLES);
+  WriteByte (MSG_ONE, 10);
   WriteAngle(MSG_ONE, self.enemy.angles_x);
   WriteAngle(MSG_ONE, self.enemy.angles_y);    
   WriteAngle(MSG_ONE, self.enemy.angles_z);
@@ -72,8 +68,6 @@ void () Create_chasecam =
   self.oldenemy = e;
   e.think = cammy_think;
   e.nextthink = time + 1;
-
-
 };
 
 void(entity e) Check_minsmaxs =
@@ -108,37 +102,22 @@ void() Throw_ACgib =
   newmis.velocity_z = random() * 150 + 150;
 //  newmis.velocity = newmis.velocity + self.velocity;
   newmis.classname = "fireball";
-  // Tei
   setmodel (newmis, "progs/lavaball.mdl");
-
-  //if (random()<0.5)
-	//  newmis.effects3 = EF_DOWFIRE;
-  //else
-	//  newmis.effects3 = EF3_DARKTRAIL2;
-
-  //	  newmis.effects3 = EF3_DARKSMOKE; // Too much
-
-  //InFxEnt(100,newmis, FX_FLUXFIRESMALL);
-  // Tei
   setsize (newmis, '0 0 0', '0 0 0');
   setorigin (newmis, self.origin);
   newmis.nextthink = time + 5;
   newmis.think = SUB_Remove;
   newmis.touch = fire_touch;
-
-  //newmis.effects = newmis.effects | EF_DECAL;//Tei
 };
 
 void() AC_Explode =
 {
   T_RadiusDamage (self, self, 160, self);
-	//WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-	//WriteByte (MSG_BROADCAST, TE_EXPLOSIONSMALL);//TEi
-	//WriteCoord (MSG_BROADCAST, self.origin_x);
-	//WriteCoord (MSG_BROADCAST, self.origin_y);
-	//WriteCoord (MSG_BROADCAST, self.origin_z);
-
-	//bprint("small\n");
+	WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
+	WriteByte (MSG_BROADCAST, TE_EXPLOSION);
+	WriteCoord (MSG_BROADCAST, self.origin_x);
+	WriteCoord (MSG_BROADCAST, self.origin_y);
+	WriteCoord (MSG_BROADCAST, self.origin_z);
   Throw_ACgib ();
   Throw_ACgib ();
   if (!deathmatch)
@@ -270,7 +249,7 @@ vector(float minim, float maxdist) AC_aim =
     if (e.takedamage > 1 && (e.movetype != MOVETYPE_FLY || (flg & 1) == 0 ) )
     {
       traceline (org, self.enemy.origin, TRUE, world);
-      if (e.model == "newmedia/f117.md2") //Tei: Stealth feature?
+      if (e.model == "progs/plane3.mdl")
         if (e.skin == 1 && random() < 0.5)
           trace_fraction = 0;
       if (teamplay)
@@ -351,7 +330,7 @@ vector(float minim, float maxdist) AC_aim2 =
       if (e.takedamage > 1 && (e.movetype != MOVETYPE_FLY || (flg & 1) == 0 ) )
       {
         traceline (org, self.oldenemy.origin, TRUE, world);
-        if (e.model == "newmedia/f117.md2") // Tei, stealth feature?
+        if (e.model == "progs/plane3.mdl")
           if (e.skin == 1 && random() < 0.5)
             trace_fraction = 0;
         if (teamplay)
@@ -448,9 +427,6 @@ void() T_ACTouch =  // Crash
       }
     }
   }
-
-  //FX_ScorchFinal(self.origin);//Tei
-  //FX_Scorch(self.origin);//Tei
 
 	WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
 	WriteByte (MSG_BROADCAST, TE_EXPLOSION);
@@ -557,15 +533,6 @@ void() AC_Fall =
 
   self.think = AC_Fall;
   self.nextthink = time + 0.1;
-
-  // Tei
-  //self.effects3 = EF3_DARKTRAIL;
-  // Tei
-
-  //InFxEnt(110,self,FX_FLUXFIRESMALL);
-  //InFxEnt(110,self,FX_FIRE);//Tei
-
-
 };
 
 void() AC_Die =
@@ -577,11 +544,6 @@ void() AC_Die =
 	WriteCoord (MSG_BROADCAST, self.origin_x);
 	WriteCoord (MSG_BROADCAST, self.origin_y);
 	WriteCoord (MSG_BROADCAST, self.origin_z);
-
- //FX_ScorchFinal(self.origin);//Tei
- //FX_Scorch(self.origin);//Tei
-	//FIXME!!
-
 
 //  setmodel(self,"progs/plane1b.mdl");
 

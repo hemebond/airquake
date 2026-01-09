@@ -1,7 +1,3 @@
-
-.float flycam; //Tei
-
-
 float (float n) calcbit =
 {
   if (n==0)   return 1;
@@ -231,17 +227,9 @@ vector () place_targetbox =
   traceline(self.oldenemy.origin, self.oldenemy.origin + v1, FALSE, e);
   v2 = self.oldenemy.origin + v1 * (trace_fraction - 0.04 );
   if (e.trigger_field.ts == self.ts && (teamplay > 0 || deathmatch == 0))
-	
     self.trigger_field.frame = 3;
   else
-  {
-	self.trigger_field.frame = 1;
-	if (self.Cujo) 
-	{
-		self.Cujo.enemy = self.oldenemy;//Tei
-		self.Cujo.goalentity = self.oldenemy;//Tei
-	}
-  }
+    self.trigger_field.frame = 1;
 
   if (e.trigger_field.owner.classname == "player")
   {

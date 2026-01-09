@@ -1,6 +1,5 @@
 void(float num_bubbles) DeathBubbles;
 
-
 void() gv_tilt =
 {
   local vector v1, v2, v3, v4;
@@ -170,8 +169,6 @@ void(float fac) hv_tilt =
   vehicle.avelocity_z = l2 * 4;
 };                      
 
-void () gv5_walk;
-
 void (vector v0, float sp_x, float sp_y) Turn_groundveh =
 {
   local entity stemp;
@@ -192,18 +189,11 @@ void (vector v0, float sp_x, float sp_y) Turn_groundveh =
   {
     v2_y = 0;
     stemp.angles_y = v0_y;
-	if (self.enemy.model == "progs/p8walk.mdl")
-			gv5_walk();
-
   }
 	
   if (self.lefty)
   {
     v2_y = 0 - self.lefty * sp_y;
-
-	if (self.enemy.model == "progs/p8walk.mdl")
-			gv5_walk();
-
   }
 
   stemp.angles_x = anglemod(stemp.angles_x);
@@ -319,8 +309,6 @@ void (float sp_x, float sp_y) Steer_groundveh =
   stemp = self.enemy;
   if (stemp.owner != self)
     return;
-
-  //FX_Trail();//Tei
 
   if (pointcontents(stemp.origin) < CONTENT_EMPTY)
   {
@@ -525,7 +513,6 @@ void (float sp_x, float sp_y) Steer_hover =
   if (stemp.owner != self)
     return;
 
-
   if (pointcontents(self.enemy.origin) < CONTENT_EMPTY && self.pain_finished < time)
   {
     T_Damage(stemp,stemp,stemp,50);
@@ -589,9 +576,9 @@ vector(float minim, float maxdist) GV_aim =
     if (e.takedamage > 1 && (e.movetype != MOVETYPE_FLY || (flg & 1) == 0 ) )
     {
       traceline (org, self.enemy.origin, TRUE, world);
-      //if (e.model == f117)
-      //  if (e.skin == 1 && random() < 0.5)
-      //    trace_fraction = 0;
+      if (e.model == "progs/plane3.mdl")
+        if (e.skin == 1 && random() < 0.5)
+          trace_fraction = 0;
       if (e.solid == SOLID_BSP)
       {
         f1 = vlen(org - self.enemy.origin);

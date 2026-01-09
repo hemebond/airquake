@@ -50,12 +50,10 @@ void() ac1_steer =
   stemp = self.enemy;
   Steer_plane (100, 100, 200);
 
-	/*
   if (self.health < 20 && stemp.model == "progs/plane1.mdl")
     setmodel(stemp, "progs/plane1b.mdl");
   if (self.health >= 20 && stemp.model == "progs/plane1b.mdl")
     setmodel(stemp, "progs/plane1.mdl");
-	*/
 
   makevectors(stemp.angles);
   v3 = v_forward;
@@ -263,8 +261,7 @@ void() start_aircraft1 =
   // Create the plane
   // self.enemy is your aircraft (or other vehicle?-).
   e = spawn();
-  //setmodel (e, "progs/plane1.mdl");
-  setmodel (e, "newmedia/f16.md2");
+  setmodel (e, "progs/plane1.mdl");
 
   e2 = self.goalentity;  // This is the info_player_* you spawned on.
   setorigin(e, e2.origin);

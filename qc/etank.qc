@@ -295,7 +295,7 @@ void() etank_run =
       {
         if (v_forward * v2 > 0.95)
         {
-          AC_bomb2(self.origin + v_forward * 10, v_forward * 900, self.enemy);
+          AC_bomb(self.origin + v_forward * 10, v_forward * 900, self.enemy);
           self.attack_finished = time + 1;
           self.ammo_rockets = self.ammo_rockets - 1;
           self.effects = self.effects | EF_MUZZLEFLASH;
@@ -333,12 +333,10 @@ void() etank_start =
 
   self.tur1 = spawn();
   setorigin(self.tur1, self.origin);
-  //setmodel(self.tur1, "progs/tanktr.mdl");
-  setmodel(self.tur1, "newmedia/turretm1.md2"); //Tei
+  setmodel(self.tur1, "progs/tanktr.mdl");
   self.tur2 = spawn();
   setorigin(self.tur2, self.origin);
-  setmodel(self.tur2, "newmedia/gunm1.md2");  //FIXME!!
-
+  setmodel(self.tur2, "progs/tanktb.mdl");
 
 	if (self.target)
 	{
@@ -366,8 +364,7 @@ void() monster_etank =
   if (!deathmatch)
     total_monsters = total_monsters + 1;
 
-  //setmodel(self, "progs/tankba.mdl");//
-  setmodel(self, "newmedia/tankm1.md2");
+  setmodel(self, "progs/tankba.mdl");
   setsize (self, '-16 -16 -24', '16 16 8');
   self.view_ofs = '0 0 1';
   if (!self.health)
@@ -391,5 +388,4 @@ void() monster_etank =
   self.th_missile = etank_shoot;
   self.think = etank_start;
 	self.nextthink = time + 0.1 + random ()*0.1;	
-  //self.effects3 = 69;
 };

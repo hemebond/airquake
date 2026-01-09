@@ -37,9 +37,6 @@ void() T_HETouch =  // Crash
     }
   }
 
-  //FX_ScorchFinal(self.origin);//Tei
-  //FX_Scorch(self.origin);//Tei
-
 	WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
 	WriteByte (MSG_BROADCAST, TE_EXPLOSION);
 	WriteCoord (MSG_BROADCAST, self.origin_x);
@@ -138,10 +135,6 @@ void() HE_Fall =
 
   if (self.flags & FL_ONGROUND)
     self.flags = self.flags - FL_ONGROUND;
-
-  // Tei
-  //self.effects3 = EF3_DARKTRAIL;
-  // Tei
 
   self.think = HE_Fall;
   self.nextthink = time + 0.1;

@@ -23,7 +23,7 @@ void (vector v0, float sp_x) turn_eturret =
 
   if (stemp.tur1)
   {
-    setorigin(self.tur1, self.origin);//Tei fixme
+    setorigin(self.tur1, self.origin);
     v0_y = stemp.angles_y - v0_y;
     if (v0_y > 180) v0_y = v0_y - 360;
     if (!self.flags & FL_ONGROUND)  v0_y = 0;
@@ -64,7 +64,7 @@ void (vector v0, float sp_x) turn_eturret =
 
   if (self.tur2)
   {
-    setorigin(self.tur2, self.origin);//Tei
+    setorigin(self.tur2, self.origin);
     v0_x = v0_x - stemp.angles_x;
     if (v0_x < 0) v0_x = v0_x + 360;
     if (v0_x > 180) v0_x = v0_x - 360;

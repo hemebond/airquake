@@ -9,7 +9,6 @@ TEMP1
 */
 
 void() InitBodyQue;
-void () EnginePrecache;
 
 
 void() main =
@@ -162,8 +161,6 @@ void() main =
 	precache_file2 ("maps/dm4.bsp");
 	precache_file2 ("maps/dm5.bsp");
 	precache_file2 ("maps/dm6.bsp");
-
-
 };
 
 
@@ -340,7 +337,6 @@ void() worldspawn =
 // AIRQUAKE models precache 
 
   precache_model2 ("progs/s_target.spr");
-	/*
   precache_model2 ("progs/plane1.mdl");
   precache_model2 ("progs/plane1b.mdl");
   precache_model2 ("progs/plane2.mdl");
@@ -351,21 +347,16 @@ void() worldspawn =
   precache_model2 ("progs/plane4b.mdl");
   precache_model2 ("progs/plane5.mdl");
   precache_model2 ("progs/plane5b.mdl");
-
   precache_model2 ("progs/helo1.mdl");
   precache_model2 ("progs/helo1b.mdl");
+  precache_model2 ("progs/msamba.mdl");
+  precache_model2 ("progs/msamtb.mdl");
   precache_model2 ("progs/tankba.mdl");
   precache_model2 ("progs/tanktr.mdl");
   precache_model2 ("progs/tanktb.mdl");
   precache_model2 ("progs/humba.mdl");
   precache_model2 ("progs/humtr.mdl");
   precache_model2 ("progs/humtb.mdl");
-	*/
-
-  precache_model2 ("progs/msamba.mdl");
-  precache_model2 ("progs/msamtb.mdl");
-
-
   precache_model2 ("progs/hovba.mdl");
   precache_model2 ("progs/hovtr.mdl");
   precache_model2 ("progs/hovtb.mdl");
@@ -390,7 +381,6 @@ void() worldspawn =
   precache_model2 ("progs/box1.mdl");
 
 // View models
-	/*
   precache_model2 ("progs/v_sider.mdl");
   precache_model2 ("progs/v_sting.mdl");
   precache_model2 ("progs/v_maver.mdl");
@@ -405,7 +395,7 @@ void() worldspawn =
   precache_model2 ("progs/v_rcbo.mdl");
   precache_model2 ("progs/v_pave.mdl");
   precache_model2 ("progs/v_amra.mdl");
-*/
+
 // Airquake sounds
 
 	precache_sound2 ("enforcer/enfire.wav");
@@ -581,8 +571,6 @@ void() worldspawn =
 
 	// 63 testing
 	lightstyle(63, "a");
-
-	FileDetal();
 };
 
 void() StartFrame =
@@ -595,7 +583,6 @@ void() StartFrame =
     wepmulti = 2;
   else
     wepmulti = 1;
-	
 
 	framecount = framecount + 1;
   if (time > cctime)
@@ -620,10 +607,6 @@ entity	bodyque_head;
 void() bodyque =
 {	// just here so spawn functions don't complain after the world
 	// creates bodyques
-
-	
-
-
 };
 
 void() InitBodyQue =

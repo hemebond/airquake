@@ -15,11 +15,6 @@ void() BigExplosion =
   setmodel (self, "progs/s_bigbom.spr");
 	self.solid = SOLID_NOT;
 	s_explode1 ();
-
-	// Tei
-	//FX_Scorch();
-	// Tei
-
 };
 /*
 ====================
@@ -149,11 +144,11 @@ void() ACprojectile_touchboom =
 
 	self.origin = self.origin - 8*normalize(self.velocity);
 
-	//WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-	//WriteByte (MSG_BROADCAST, TE_EXPLOSIONSMALL2);//Tei
-	//WriteCoord (MSG_BROADCAST, self.origin_x);
-	//WriteCoord (MSG_BROADCAST, self.origin_y);
-	//WriteCoord (MSG_BROADCAST, self.origin_z);
+	WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
+	WriteByte (MSG_BROADCAST, TE_EXPLOSION);
+	WriteCoord (MSG_BROADCAST, self.origin_x);
+	WriteCoord (MSG_BROADCAST, self.origin_y);
+	WriteCoord (MSG_BROADCAST, self.origin_z);
 
   BecomeExplosion ();
 //  BigExplosion ();
@@ -251,10 +246,7 @@ void(vector org, vector dir, entity targ) AC_spike =
 	setorigin (newmis, org);
 
   newmis.velocity = dir * 1500;
-	
-  newmis.alpha = 0.1;//Tei
 
- /////InFxEnt(3, self, FX_AUTOGUN);// Tei FIXME!! HARD BUG
 //  self.lastmiss = newmis;
 };
 
@@ -350,9 +342,6 @@ void(vector org, vector dir, entity targ) AC_laser =
 	setorigin (newmis, org);
 
   newmis.velocity = dir * 1500;
-  // Tei
-  newmis.alpha = 0.2;
-  // Tei
 //  self.lastmiss = newmis;
 };
 
@@ -381,11 +370,7 @@ void(vector org, vector vec) LaunchLaser =
 
 	newmis.nextthink = time + 5;
 	newmis.think = SUB_Remove;
-	newmis.touch = AClaser_touch;
-	// Tei
-	newmis.alpha = 0.2;
-	// Tei
-
+  newmis.touch = AClaser_touch;
 };
 
 /*
@@ -421,7 +406,6 @@ void(vector org, vector dir, entity targ) AC_rocket =
 
 	newmis.velocity = dir * 1000;
   self.lastmiss = newmis;
-  //InFxEnt(110, newmis, FX_FIRE);//Tei
 };
 
 /*
@@ -526,102 +510,11 @@ void(vector org, vector dir, entity targ) AC_bomb =
   self.lastmiss = newmis;
 };
 
-
-//TEi
-void(vector org, vector dir, entity targ) AC_bomb2 =
-{
-  sound (self.enemy, CHAN_WEAPON, "weapons/sgun1.wav", 1, ATTN_NORM);
-
-	newmis = spawn ();
-  if (targ != self.enemy)
-    newmis.owner = self.enemy;
-  else
-    newmis.owner = self;
-  newmis.movetype = MOVETYPE_BOUNCE;
-  newmis.solid = SOLID_BBOX;
-
-  setmodel (newmis, "progs/obus.mdl");
-	setsize (newmis, '0 0 0', '0 0 0');		
-
-	newmis.angles = vectoangles(dir);
-	
-  newmis.touch = ACprojectile_touchboom;
-  newmis.dmg = 130;
-  newmis.classname = "bomb";
-  newmis.think = bomb_rotate; //SUB_Remove;
-  newmis.nextthink = time + 0.1;
-	setorigin (newmis, org);
-
-  newmis.velocity = dir;
-  newmis.attack_finished = time + 10;
-  self.lastmiss = newmis;
-  //InFxEnt(110,newmis, FX_FIRE );//Tei
-  //InFxEnt(110,newmis, 26 );//Tei
-
-};
-
-void () PREACprojectile_touchboom =
-{
-	if (self.weapon) 
-	{
-		self.weapon = self.weapon - 1;
-		if (!other.takedamage)
-			return;
-		if (other.ts == self.owner.ts)
-			return;
-	}
-	self.touch = ACprojectile_touchboom;
-	self.think = bomb_rotate;
-	self.nextthink = time + 0.1;
-};
-
-void ()paveway_fly;
-
-void(vector org, vector dir, entity targ) AC_bomb3 =
-{
-  sound (self.enemy, CHAN_WEAPON, "weapons/sgun1.wav", 1, ATTN_NORM);
-
-  newmis = spawn ();
-  if (targ != self.enemy)
-    newmis.owner = self.enemy;
-  else
-    newmis.owner = self;
-
-  newmis.movetype = MOVETYPE_FLY;
-  newmis.solid = SOLID_BBOX;
-
-  setmodel (newmis, "progs/obus.mdl");
-  setsize (newmis,  '0 0 0','0 0 0');		
-
-  newmis.angles = vectoangles(dir);
-	
-  newmis.touch = ACprojectile_touchboom;
-  newmis.dmg = 130;
-  newmis.classname = "bomb";
-
-  newmis.think = bomb_rotate; //SUB_Remove;
-
-  newmis.nextthink = time + 0.1;
-
-  setorigin (newmis, org);
-
-  newmis.velocity = normalize(dir) * 300;
-  newmis.attack_finished = time + 10;
-
-  self.lastmiss = newmis;
-
-  //InFxEnt(110,newmis, FX_FIRE );//Tei
-  //InFxEnt(110,newmis, 26 );//Tei
-};
-//Tei
-
 /*
 ============
 MINES
 ============
 */
-
-
 
 void(vector org, vector dir, entity targ) AC_mine =
 {
@@ -891,15 +784,15 @@ void() ACmissile_home =
     self.enemy.goalentity.rad_time = time + 0.5;
   }
 
-  //if (self.enemy.model == f117 )
-  //{  // Lose target w/ some change, if it's stealth..
-  //  if (self.enemy.unstealth_finished < time && random() < 0.1)
-  //  {
-  //    self.think = ACprojectile_expireboom;
-  //    self.nextthink = self.attack_finished;
-  //    return;
-  //  }
-  //}
+  if (self.enemy.model == "progs/plane3.mdl" || self.enemy.model == "progs/plane3b.mdl")
+  {  // Lose target w/ some change, if it's stealth..
+    if (self.enemy.unstealth_finished < time && random() < 0.1)
+    {
+      self.think = ACprojectile_expireboom;
+      self.nextthink = self.attack_finished;
+      return;
+    }
+  }
   if (self.angles_x > 180)
     self.angles_x = self.angles_x - 360;
 
@@ -1028,8 +921,6 @@ void(vector org, vector dir, entity targ, float dm) AC_seekingmissile =
   if (targ.takedamage)
     targ.pdmg = targ.pdmg + newmis.dmg;
   self.lastmiss = newmis;
-
- //InFxEnt(110, newmis, FX_FIRE);//Tei
 };
 
 void(vector org, vector dir, entity targ) AC_heatseeker =  // SAM
@@ -1049,7 +940,6 @@ void(vector org, vector dir, entity targ) AC_heatseeker =  // SAM
     newmis.nextthink = time + 5;
 
   newmis.velocity = dir * 800;
-  //InFxEnt(110, newmis, FX_FIRE);//Tei
 };
 
 void(vector org, vector dir, entity targ) AC_miniseeker =
@@ -1069,7 +959,6 @@ void(vector org, vector dir, entity targ) AC_miniseeker =
     newmis.nextthink = time + 1.5;
 
   newmis.velocity = dir * 1000;
-  //InFxEnt(110, newmis, FX_FIRE);//Tei
 };
 
 /*
@@ -1095,7 +984,6 @@ void(vector org, vector dir, entity targ) AC_bigseeker =
     newmis.nextthink = time + 5;
 
   newmis.velocity = dir * 500;
-  //InFxEnt(110, newmis, FX_FIRE);//Tei
 };
 
 /*
@@ -1121,7 +1009,6 @@ void(vector org, vector dir, entity targ) AC_sidewinder =
     newmis.nextthink = time + 5;
 
   newmis.velocity = dir * 800;
-  //InFxEnt(110, newmis, FX_SMOKE);//Tei
 };
 
 /*
@@ -1147,7 +1034,6 @@ void(vector org, vector dir, entity targ) AC_amraam =
     newmis.nextthink = time + 5;
 
   newmis.velocity = dir * 1000;
-  //InFxEnt(110, newmis, FX_FIRE);//Tei
 };
 
 /*
@@ -1173,7 +1059,6 @@ void(vector org, vector dir, entity targ) AC_stinger =
     newmis.nextthink = time + 5;
 
   newmis.velocity = dir * 800;
-  //InFxEnt(110, newmis, FX_FIRE);//Tei
 };
 
 /*
@@ -1199,7 +1084,6 @@ void(vector org, vector dir, entity targ) AC_maverick =
     newmis.nextthink = time + 5;
 
   newmis.velocity = dir * 500;
-  //InFxEnt(110, newmis, FX_FIRE);//Tei
 };
 
 /*
@@ -1225,7 +1109,6 @@ void(vector org, vector dir, entity targ) AC_hellfire =
     newmis.nextthink = time + 5;
 
   newmis.velocity = dir * 600;
-  //InFxEnt(110, newmis, FX_FIRE);//Tei
 };
 
 /*
@@ -1233,9 +1116,7 @@ void(vector org, vector dir, entity targ) AC_hellfire =
  PLASMA GUN
 ===============
 */
-void()  s_pexplode0  = [0,   s_pexplode1] {
-//  FX_Scorch();
-};
+void()  s_pexplode0  = [0,   s_pexplode1] {};
 void()  s_pexplode1  = [1,   s_pexplode2] {};
 void()  s_pexplode2  = [2,   s_pexplode3] {};
 void()  s_pexplode3  = [3,   s_pexplode4] {};
@@ -1250,7 +1131,6 @@ void() PlasmaExplosion =
   setmodel (self, "progs/s_plasma.spr");
 	self.solid = SOLID_NOT;
   s_pexplode0 ();
-  
 };
 
 void() Plasma_Watercheck =
@@ -1319,8 +1199,7 @@ void(vector org, vector dir, entity targ) AC_plasma =
 	newmis.solid = SOLID_BBOX;
 	newmis.effects = EF_DIMLIGHT;
 
-  //setmodel (newmis, "progs/pbullet.mdl");
-  setmodel (newmis, "progs/fx_void.mdl");
+  setmodel (newmis, "progs/pbullet.mdl");
 	setsize (newmis, '0 0 0', '0 0 0');		
   newmis.skin = 1;
 
@@ -1332,24 +1211,10 @@ void(vector org, vector dir, entity targ) AC_plasma =
   newmis.enemy = targ;
 
 	setorigin (newmis, org);
-  //newmis.effects = newmis.effects | EF_BLUEFIRE; // Tei
-
-  //InFxEnt(110, newmis, FX_FLAREFIRE);//Tei
 
   newmis.velocity = dir * 1200;
   newmis.avelocity = '300 300 300';  
   self.lastmiss = newmis;
-
-	// strange fx
-	WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-	WriteByte (MSG_BROADCAST,  52);
-	WriteVec ( org );
-	WriteVec ( dir * 1199 );
-	WriteVec ( '90 90 255' );
-	WriteByte( MSG_BROADCAST, 6 );
-	WriteByte( MSG_BROADCAST, 1 );
-	// strange fx
-
 };
 
 /*
@@ -1378,7 +1243,7 @@ void() AC_Flare =
   if (self.style > 6)
     newmis.velocity = newmis.velocity + '0 0 600';
   newmis.classname = "flare";
-  setmodel (newmis, "progs/flare.spr");//
+  setmodel (newmis, "progs/lavaball.mdl");
   setsize (newmis, '0 0 0', '0 0 0');
   setorigin (newmis, self.enemy.origin);
   newmis.nextthink = time + 5;
@@ -1386,7 +1251,6 @@ void() AC_Flare =
   newmis.touch = flare_touch;
   newmis.effects = 4;
 
- //InFxEnt(110, newmis, FX_FLUXFIRESMALL);//Tei
   e = find (world, classname, "missile");
   while (e)
   {

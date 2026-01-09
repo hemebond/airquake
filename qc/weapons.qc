@@ -28,9 +28,6 @@ void() W_Precache =
 	precache_sound ("weapons/bounce.wav");		// grenade bounce
 	precache_sound ("weapons/shotgn2.wav");	// super shotgun
 
-
-	EnginePrecache();// Tei engine
-
 };
 
 float() crandom =
@@ -254,15 +251,6 @@ void() BecomeExplosion =
 	setmodel (self, "progs/s_explod.spr");
 	self.solid = SOLID_NOT;
 	s_explode1 ();
-
-	// Tei
-	//FX_Scorch();
-	/*
-	traceline(self.origin, self.origin + '0 0 -10', FALSE, self);
-	if(trace_fraction != 1)
-	    PlaceDecal(trace_endpos+'0 0 1', "progs/scorch.spr");
-	*/
-	// Tei
 };
 
 void() T_MissileTouch =
@@ -518,8 +506,6 @@ void() W_SetCurrentAmmo =
 	{
 		self.currentammo = 0;
 	}
-
- //g_ammo(self.currentammo);//Tei
 };
 
 float() W_BestWeapon =
@@ -592,6 +578,7 @@ void() W_ChangeWeapon =
 		sprint (self, "not enough ammo.\n");
 		return;
 	}
+
 //
 // set weapon, set ammo
 //
@@ -621,8 +608,7 @@ void() CheatCommand =
   self.ammo_smsl = 250;
   self.ammo_mine = 250;
   self.ammo_bomb = 250;
-  
-  self.health = 250;
+
   check_ammo(self, 0);
 	self.impulse = 0;
 	W_SetCurrentAmmo ();
@@ -744,38 +730,18 @@ ImpulseCommands
 
 ============
 */
-
-
-//void () FileDetal;
-//void () AddLocation;
-
-void () CUJO_CheckImpulses;
-
 void() ImpulseCommands =
 {
   local vector v1;
   local entity e;
-
   if (self.impulse >= 1 && self.impulse <= 4)
-	W_ChangeWeapon ();
-
-
-  CUJO_CheckImpulses ();//Tei
-  /*
-  if (self.impulse == 132)
-	AddLocation();
-
-  if (self.impulse == 133)
-	FileDetal();
-	*/
-
+		W_ChangeWeapon ();
 
   if (self.impulse == 5 && self.attack_finished < time)
   {
     AC_Flare ();
     self.attack_finished = time + 1;
   }
-  else   
   if (self.impulse >= 7 && self.impulse <= 8)
   {
     if (self.impulse == 7 && self.enemy.thru > 0)
@@ -788,63 +754,31 @@ void() ImpulseCommands =
       self.enemy.thru = self.enemy.thru + 1;
       self.fly_sound = time;
     }
-    if (self.enemy.thru == 0) 
-	{
-	centerprint(self, "/Athrust: 0%\n");
-	//g_updatesteer(0);
-	}
-    else if (self.enemy.thru == 1)
-	{
-	 centerprint(self, "/Athrust: 25%\n");
-	//g_updatesteer(1);
-	}
-    else if (self.enemy.thru == 2) 
-	{
-	centerprint(self, "/Athrust: 50%\n");
-	//g_updatesteer(2);
-	}
-    else if (self.enemy.thru == 3) 
-	{
-	centerprint(self, "/Athrust: 75%\n");
-	//g_updatesteer(3);
-	}
-    else if (self.enemy.thru == 4) 
-	{
-	centerprint(self, "/Athrust:100%\n");
-	//g_updatesteer(4);
-	}
+    if (self.enemy.thru == 0) sprint(self, "thrust: 0%\n");
+    else if (self.enemy.thru == 1) sprint(self, "thrust: 25%\n");
+    else if (self.enemy.thru == 2) sprint(self, "thrust: 50%\n");
+    else if (self.enemy.thru == 3) sprint(self, "thrust: 75%\n");
+    else if (self.enemy.thru == 4) sprint(self, "thrust:100%\n");
   }
-  else
   if (self.impulse == 9)
   {
     self.missileview_on = 1 - self.missileview_on;
     if (self.missileview_on)
-	{
-      centerprint(self, "/AMissile view on\n");
-	//ShowVideo();
-	}
+      sprint(self, "Missile view on\n");
     else
-	{
-      centerprint(self, "/AMissile view off\n");
-	//ShowNOVideo();
-	}
+      sprint(self, "Missile view off\n");
   }
-  else
+
   if (self.impulse == 11)
 		CheatCommand ();
-  else
   if (self.impulse == 12)
     CycleWeaponCommand ();
-  else
   if (self.impulse == 13)
-		ServerflagsCommand (); 
-  else
+		ServerflagsCommand ();
   if (self.impulse == 14)
 		CycleWeaponReverseCommand ();
-  else
-  if (self.impulse == 255)
+	if (self.impulse == 255)
 		QuadCheat ();
-  
   if (self.impulse >= 100 && self.impulse <= 104)
   {
     self.toyview = self.impulse - 100;
@@ -861,12 +795,8 @@ void() ImpulseCommands =
     if (self.toyview < 4)
     {
       msg_entity = self;
-
-	//SVC_SETVIEW 
       WriteByte  (MSG_ONE, 5);
       WriteEntity(MSG_ONE,self.oldenemy);
-
-	//SVC_SETANGLE
       WriteByte (MSG_ONE, 10);  
       WriteAngle(MSG_ONE, v1_x );
       WriteAngle(MSG_ONE, v1_y );    
@@ -892,16 +822,6 @@ W_WeaponFrame
 Called every frame so impulse events can be handled as well as possible
 ============
 */
-
-void () DropPalm =
-{
-	bprint("set palm ");
-	bprint(vtos(self.origin));
-	bprint("\n;droppalm\n");
-	
-};
-
-
 void() W_WeaponFrame =
 {
   local float i;
@@ -910,12 +830,6 @@ void() W_WeaponFrame =
 
   if (self.enemy.owner == self)
     self.th_run ();
-
-	/*
-	if (self.impulse == 77)
-		DropPalm();
-	*/
-
 
 	ImpulseCommands ();
 

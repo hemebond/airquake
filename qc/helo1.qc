@@ -1,5 +1,3 @@
-
-
 void() he1_currentammo =
 {
   self.ammo_shells = self.ammo_auto;
@@ -8,16 +6,12 @@ void() he1_currentammo =
   self.ammo_cells = self.ammo_smsl;
 
   if (self.weapon == IT_WEP1)
-	//Geapon("auto");
     self.weaponmodel = "progs/v_auto.mdl";
   else if (self.weapon == IT_WEP2)
-	//Geapon("rockets");
     self.weaponmodel = "progs/v_rock.mdl";
   else if (self.weapon == IT_WEP3)
-	//Geapon("sider");
     self.weaponmodel = "progs/v_sider.mdl";
   else if (self.weapon == IT_WEP4)
-	//Geapon("hellfire");
     self.weaponmodel = "progs/v_hell.mdl";
 };
 
@@ -29,16 +23,6 @@ void() he1_steer =
   local float mov;
 
   stemp = self.enemy;
-
- //Tei
-	/*
-  if (stemp.frame < 15)
-	stemp.frame = stemp.frame + 1;
-  else
-	stemp.frame = 0;
-	*/
-  //CopterSparks(stemp);
- //Tei
 
 //  sound
   if (time > self.fly_sound)
@@ -329,60 +313,14 @@ void() he1_attack =
   }
 };
 
-void () T_Cycle =
-{
-	local float r;
-	/*if (self.frame )
-       	self.frame = self.frame  - 1; 
-	else 
-		self.frame = 15;
-	*/
-	
-	r = floor(random() * 7);
-	
-	self.frame = r;
-
-	self.nextthink = time + 0.05;
-
-	if ((self.aiment.serial != self.serial) || self.aiment.health<1 || (!self.aiment))
-		remove(self);
-};
-
-void (entity e, string modelo) GimmeRotor =
-{
-   local entity e3;
-
-    e3 = spawn();
-    setmodel (e3, modelo);
-   setorigin (e3, e.enemy.origin);
-   e3.owner = e;
-  
-	
-    e3.colormap = e.colormap;
-    e.tur1 = e3;	
-    e3.think = T_Cycle;
-    e3.aiment = e;   
-    e3.movetype = MOVETYPE_FOLLOW;
-    e3.aiment = e;
-    e3.nextthink = time + 0.1;
-    e3.alpha = 0.3;
-     
-    e3.serial = random();
-    e.serial = e3.serial;   
-};
-
 void() start_helo1 =
 {
-  local entity e, e2, e3;
+  local entity e, e2;
 
   // Create the plane
   // self.enemy is your aircraft (or other vehicle?-).
   e = spawn();
-  setmodel (e, "newmedia/helo.md2");//tei
-
-  // Tei - Add rotors
-    GimmeRotor( e, "newmedia/rotors.md2" );
-  // Tei - Add rotors  
+  setmodel (e, "progs/helo1.mdl");
 
   e2 = self.goalentity;  // This is the info_player_* you spawned on.
   setorigin(e, e2.origin);

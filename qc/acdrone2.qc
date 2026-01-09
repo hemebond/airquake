@@ -349,8 +349,8 @@ void() monster_drone2 =
 
   if (self.style == 2)
   {
-    self.noise1 = "newmedia/f16.md2";
-    self.noise2 = "newmedia/f16.md2";
+    self.noise1 = "progs/plane2.mdl";
+    self.noise2 = "progs/plane2b.mdl";
     self.max_health = 250;
     self.netname = "Fighter Bomber";
     self.th_missile = drone_maver;
@@ -359,8 +359,8 @@ void() monster_drone2 =
   }
   else if (self.style == 3)
   {
-    self.noise1 = "newmedia/f117.md2"; //"progs/plane3.mdl";
-    self.noise2 = "newmedia/f117.md2";
+    self.noise1 = "progs/plane3.mdl";
+    self.noise2 = "progs/plane3b.mdl";
     self.max_health = 200;
     self.netname = "Stealth Fighter";
     self.th_missile = drone_pave;
@@ -369,8 +369,8 @@ void() monster_drone2 =
   }
   else if (self.style == 4)
   {
-    self.noise1 = "newmedia/a10.md2";
-    self.noise2 = "newmedia/a10.md2";
+    self.noise1 = "progs/plane4.mdl";
+    self.noise2 = "progs/plane4b.mdl";
     self.max_health = 350;
     self.netname = "A-10";
     self.th_missile = drone_bombs;
@@ -379,8 +379,8 @@ void() monster_drone2 =
   }
   else if (self.style == 5)
   {
-    self.noise1 = "newmedia/f22.md2";
-    self.noise2 = "newmedia/f22.md2";
+    self.noise1 = "progs/plane5.mdl";
+    self.noise2 = "progs/plane5b.mdl";
     self.max_health = 170;
     self.netname = "X-29";
     self.th_missile = drone_sider;
@@ -390,8 +390,8 @@ void() monster_drone2 =
   else
   {
     self.style = 1;
-    self.noise1 = "newmedia/f18.md2";
-    self.noise2 = "newmedia/f18.md2";
+    self.noise1 = "progs/plane1.mdl";
+    self.noise2 = "progs/plane1b.mdl";
     self.max_health = 200;
     self.netname = "Dogfighter";
     self.th_missile = drone_sider;

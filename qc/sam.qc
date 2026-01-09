@@ -177,9 +177,7 @@ void() start_monster_sam =
   stemp = spawn();
   stemp.owner = self;
   stemp.takedamage = DAMAGE_NO;
-  //setmodel(stemp, "progs/samtb.mdl");
-
-  setmodel(stemp, "newmedia/sampak.md2");//Tei
+  setmodel(stemp, "progs/samtb.mdl");
   self.trigger_field = stemp;
   stemp.angles = self.angles;
   setorigin(stemp, self.origin);
@@ -195,9 +193,7 @@ void() monster_sam =
   local vector v1;
 
   precache_model ("progs/samba.mdl");
-  //precache_model ("progs/samtb.mdl");
-
-  precache_model ("newmedia/sampak.md2");//Tei
+  precache_model ("progs/samtb.mdl");
 
   if (!deathmatch)
     total_monsters = total_monsters + 1;

@@ -222,8 +222,6 @@ void() ACammo_touch =
 	if (other.health <= 0)
 		return;
 
-  //rint("optimize bug!\n");
-
   pler = other.goalentity;
 
 	stemp = self;

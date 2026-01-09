@@ -5,19 +5,13 @@ void() ac3_currentammo =
   self.ammo_rockets = self.ammo_bomb;
   self.ammo_cells = self.ammo_smsl;
 
-  return;
-
   if (self.weapon == IT_WEP1)
-	 //Geapon("auto");
     self.weaponmodel = "progs/v_auto.mdl";
   else if (self.weapon == IT_WEP2)
-	//Geapon("sider");
     self.weaponmodel = "progs/v_sider.mdl";
   else if (self.weapon == IT_WEP3)
-	//Geapon("pave");
     self.weaponmodel = "progs/v_pave.mdl";
   else if (self.weapon == IT_WEP4)
-	//Geapon("maver");
     self.weaponmodel = "progs/v_maver.mdl";
 };
 
@@ -31,19 +25,10 @@ void() ac3_steer =
   Steer_plane (70, 80, 200);
   jet_sound();
 
-  /*
   if (self.health < 20 && stemp.model == "progs/plane3.mdl")
     setmodel(stemp, "progs/plane3b.mdl");
   if (self.health >= 20 && stemp.model == "progs/plane3b.mdl")
     setmodel(stemp, "progs/plane3.mdl");
-	*/
-  //if (self.health < 20 && (self.effects!=EF3_DARKTRAIL2) ) //Tei
-	//self.effects3 = EF3_DARKTRAIL2;
-  //Tei
-  //if(stemp.speed>95)
-	//  CopterSparks(stemp);
-  //Tei
-
 
   if (stemp.health < 1)
   {
@@ -62,12 +47,10 @@ void() ac3_steer =
     stemp.skin = 1;
     if (self.trigger_field.model == "progs/s_target.spr")
       setmodel(self.trigger_field, "progs/null.spr");
-    stemp.alpha = 0.5;//Tei
   }
   else
   {
     stemp.skin = 0;
-    stemp.alpha = 1;//tei
     if (self.trigger_field.model == "progs/null.spr")
       setmodel(self.trigger_field, "progs/s_target.spr");
     if (self.health < 20)
@@ -240,10 +223,7 @@ void() start_aircraft3 =
   // Create the plane
   // self.enemy is your aircraft (or other vehicle?-).
   e = spawn();
-  //setmodel (e, "progs/plane3.mdl");
-
-  setmodel (e, "newmedia/f117.md2");
-
+  setmodel (e, "progs/plane3.mdl");
 
   e2 = self.goalentity;  // This is the info_player_* you spawned on.
   setorigin(e, e2.origin);

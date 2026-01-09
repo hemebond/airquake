@@ -10,9 +10,6 @@ void() gv3_steer =
   tmp=floor(tmp);
   if (tmp > 8) tmp = 8;
 
-  //if(self.enemy.speed>95)
-	//  CopterSparks(veh);
-
   if (time > self.fly_sound || veh.impulse != tmp)
   {
     if (tmp == 0)
@@ -260,16 +257,12 @@ void() gv3_currentammo =
   self.ammo_cells = self.ammo_bomb;
 
   if (self.weapon == IT_WEP1)
-	//Geapon("auto");
     self.weaponmodel = "progs/v_auto.mdl";
   else if (self.weapon == IT_WEP2)
-	//Geapon("sting");
     self.weaponmodel = "progs/v_sting.mdl";
   else if (self.weapon == IT_WEP3)
-	//Geapon("mine");
     self.weaponmodel = "progs/v_mine.mdl";
   else if (self.weapon == IT_WEP4)
-	//Geapon("rc");
     self.weaponmodel = "progs/v_rcbo.mdl";
 };
 // HUMVEE
@@ -282,9 +275,7 @@ void() start_groundveh3 =
 
   // Create the veh -> self.enemy
   e = spawn();
-  //setmodel (e, "progs/humba.mdl");
-  setmodel (e, "newmedia/brd.md2");
-
+  setmodel (e, "progs/humba.mdl");
   e2 = self.goalentity;  // This is the info_player_* you spawned on.
   setorigin(self, e2.origin);
   setorigin(e, e2.origin);
@@ -314,9 +305,7 @@ void() start_groundveh3 =
   // Create the gun barrels
   // == vehicle.oldenemy
   e = spawn();
-  //setmodel (e, "progs/humtb.mdl");
-  setmodel (e, "newmedia/brdgun.md2");
-
+  setmodel (e, "progs/humtb.mdl");
   setorigin (e, self.enemy.origin);
   e.owner = self;
   self.enemy.oldenemy = e;
@@ -325,11 +314,8 @@ void() start_groundveh3 =
   // Create the turret
   // == vehicle.movetarget
   e = spawn();
-  //setmodel (e, "progs/humtr.mdl");
-  setmodel (e, "newmedia/brdturret.md2");
-
+  setmodel (e, "progs/humtr.mdl");
   setorigin (e, self.enemy.origin);
-
   e.owner = self;
   self.enemy.movetarget = e;
   e.colormap = self.colormap;

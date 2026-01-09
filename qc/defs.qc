@@ -232,21 +232,6 @@ float admin_p_3;
 
 .string		noise, noise1, noise2, noise3;	// contains names of wavs to play
 
-
-// Tei engine
-
-.float msg_forwardmove;  
-.float msg_sidemove;
-.float msg_upmove;
-.string weaponmodel2;
-.float effects2;
-.float effects3; 
-.float magmultiplier;
-
-// Tei engine
-
-
-
 //================================================
 void		end_sys_fields;			// flag for structure dumping
 //================================================
@@ -402,53 +387,13 @@ vector	VEC_HULL2_MIN = '-32 -32 -24';
 vector	VEC_HULL2_MAX = '32 32 64';
 
 // protocol bytes
-//float   SVC_SETVIEWPORT     = 5;
-//float   SVC_SETANGLES       = 10;
-//float	SVC_TEMPENTITY		= 23;
-//float	SVC_KILLEDMONSTER	= 27;
-//float	SVC_FOUNDSECRET		= 28;
-//float	SVC_INTERMISSION	= 30;
-//float	SVC_FINALE			= 31;
-//float	SVC_CDTRACK			= 32;
-//float	SVC_SELLSCREEN		= 33;
-//float   SVC_UPDATE          = 128;
-
-float SVC_BAD = 0;
-float SVC_NOP = 1;
-float SVC_DISCONNECT = 2;
-float SVC_UPDATESTAT = 3;
-float SVC_VERSION = 4;
-float SVC_SETVIEWPORT = 5;
-float SVC_SOUND = 6
-float SVC_TIME = 7;
-float SVC_PRINT = 8;
-float SVC_STUFFTEXT = 9;
-float SVC_SETANGLES = 10;
-float SVC_SERVERINFO = 11;
-float SVC_LIGHTSTYLE = 12;
-float SVC_UPDATENAME = 13;
-float SVC_UPDATEFRAGS = 13;
-float SVC_CLIENTDATA = 14;
-float SVC_STOPSOUND = 16;
-float SVC_UPDATECOLORS = 17;
-float SVC_PARTICLE = 18;
-float SVC_DAMAGE = 19;
-float SVC_SPAWNSTATIC = 20;
-float SVC_SPAWNBINARY = 21;
-float SVC_SPAWNBASELINE = 22;
-float SVC_TEMPENTITY = 23;
-float SVC_SETPAUSE = 24;
-float SVC_SIGNONNUM = 25;
-float SVC_CENTERPRINT = 26;
-float SVC_KILLEDMONSTER = 27;
-float SVC_FOUNDSECRET = 28;
-float SVC_SPAWNSTATICSOUND = 29;
-float SVC_INTERMISSION = 30;
-float SVC_FINALE = 31;
-float SVC_CDTRACK = 32;
-float SVC_SELLSCREEN = 33;
-float SVC_CUTSCENE = 34;
-float SVC_UPDATEENTITY = 128;
+float	SVC_TEMPENTITY		= 23;
+float	SVC_KILLEDMONSTER	= 27;
+float	SVC_FOUNDSECRET		= 28;
+float	SVC_INTERMISSION	= 30;
+float	SVC_FINALE			= 31;
+float	SVC_CDTRACK			= 32;
+float	SVC_SELLSCREEN		= 33;
 
 
 float	TE_SPIKE		= 0;
@@ -801,15 +746,3 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage;
 float(entity targ, entity inflictor) CanDamage;
 
 
-// Tei 
-.float serial;
-// Tei
-
-
-
-void (vector org)WriteVec =
-{
-	WriteCoord (MSG_BROADCAST, org_x);
-	WriteCoord (MSG_BROADCAST, org_y);
-	WriteCoord (MSG_BROADCAST, org_z);
-}

@@ -9,8 +9,6 @@ void (vector org, entity death_owner) spawn_tdeath;
 
 float	modelindex_eyes, modelindex_player;
 
-
-
 /*
 =============================================================================
 
@@ -62,9 +60,6 @@ void() SetChangeParms =
 
 void() SetNewParms =
 {
-
-  //test();
-
   parm1 = IT_WEP1 | IT_WEP2 |
           IT_WEP3 | IT_WEP4;
   parm2 = 100;
@@ -184,6 +179,76 @@ void() ExitIntermission =
 //
 // run some text if at the end of an episode
 //
+	if (intermission_running == 2)
+	{
+		if (world.model == "maps/e1m7.bsp")
+		{
+			WriteByte (MSG_ALL, SVC_CDTRACK);
+			WriteByte (MSG_ALL, 2);
+			WriteByte (MSG_ALL, 3);
+			if (!cvar("registered"))
+			{
+				WriteByte (MSG_ALL, SVC_FINALE);
+				WriteString (MSG_ALL, "As the corpse of the monstrous entity\nChthon sinks back into the lava whence\nit rose, you grip the Rune of Earth\nMagic tightly. Now that you have\nconquered the Dimension of the Doomed,\nrealm of Earth Magic, you are ready to\ncomplete your task in the other three\nhaunted lands of Quake. Or are you? If\nyou don't register Quake, you'll never\nknow what awaits you in the Realm of\nBlack Magic, the Netherworld, and the\nElder World!");
+			}
+			else
+			{
+				WriteByte (MSG_ALL, SVC_FINALE);
+				WriteString (MSG_ALL, "As the corpse of the monstrous entity\nChthon sinks back into the lava whence\nit rose, you grip the Rune of Earth\nMagic tightly. Now that you have\nconquered the Dimension of the Doomed,\nrealm of Earth Magic, you are ready to\ncomplete your task. A Rune of magic\npower lies at the end of each haunted\nland of Quake. Go forth, seek the\ntotality of the four Runes!");
+			}
+			return;
+		}
+		else if (world.model == "maps/e2m6.bsp")
+		{
+			WriteByte (MSG_ALL, SVC_CDTRACK);
+			WriteByte (MSG_ALL, 2);
+			WriteByte (MSG_ALL, 3);
+
+			WriteByte (MSG_ALL, SVC_FINALE);
+			WriteString (MSG_ALL, "The Rune of Black Magic throbs evilly in\nyour hand and whispers dark thoughts\ninto your brain. You learn the inmost\nlore of the Hell-Mother; Shub-Niggurath!\nYou now know that she is behind all the\nterrible plotting which has led to so\nmuch death and horror. But she is not\ninviolate! Armed with this Rune, you\nrealize that once all four Runes are\ncombined, the gate to Shub-Niggurath's\nPit will open, and you can face the\nWitch-Goddess herself in her frightful\notherworld cathedral.");
+			return;
+		}
+		else if (world.model == "maps/e3m6.bsp")
+		{
+			WriteByte (MSG_ALL, SVC_CDTRACK);
+			WriteByte (MSG_ALL, 2);
+			WriteByte (MSG_ALL, 3);
+
+			WriteByte (MSG_ALL, SVC_FINALE);
+			WriteString (MSG_ALL, "The charred viscera of diabolic horrors\nbubble viscously as you seize the Rune\nof Hell Magic. Its heat scorches your\nhand, and its terrible secrets blight\nyour mind. Gathering the shreds of your\ncourage, you shake the devil's shackles\nfrom your soul, and become ever more\nhard and determined to destroy the\nhideous creatures whose mere existence\nthreatens the souls and psyches of all\nthe population of Earth.");
+			return;
+		}
+		else if (world.model == "maps/e4m7.bsp")
+		{
+			WriteByte (MSG_ALL, SVC_CDTRACK);
+			WriteByte (MSG_ALL, 2);
+			WriteByte (MSG_ALL, 3);
+
+			WriteByte (MSG_ALL, SVC_FINALE);
+			WriteString (MSG_ALL, "Despite the awful might of the Elder\nWorld, you have achieved the Rune of\nElder Magic, capstone of all types of\narcane wisdom. Beyond good and evil,\nbeyond life and death, the Rune\npulsates, heavy with import. Patient and\npotent, the Elder Being Shub-Niggurath\nweaves her dire plans to clear off all\nlife from the Earth, and bring her own\nfoul offspring to our world! For all the\ndwellers in these nightmare dimensions\nare her descendants! Once all Runes of\nmagic power are united, the energy\nbehind them will blast open the Gateway\nto Shub-Niggurath, and you can travel\nthere to foil the Hell-Mother's plots\nin person.");
+			return;
+		}
+
+		GotoNextMap();
+	}
+	
+	if (intermission_running == 3)
+	{
+		if (!cvar("registered"))
+		{	// shareware episode has been completed, go to sell screen
+			WriteByte (MSG_ALL, SVC_SELLSCREEN);
+			return;
+		}
+		
+		if ( (serverflags&15) == 15)
+		{
+			WriteByte (MSG_ALL, SVC_FINALE);
+			WriteString (MSG_ALL, "Now, you have all four Runes. You sense\ntremendous invisible forces moving to\nunseal ancient barriers. Shub-Niggurath\nhad hoped to use the Runes Herself to\nclear off the Earth, but now instead,\nyou will use them to enter her home and\nconfront her as an avatar of avenging\nEarth-life. If you defeat her, you will\nbe remembered forever as the savior of\nthe planet. If she conquers, it will be\nas if you had never been born.");
+			return;
+		}
+		
+	}
+
 	GotoNextMap();
 };
 
@@ -347,16 +412,16 @@ void() respawn =
 	}
 	else
 	{	// restart the entire server
-	    if (self.lives == 1 && self.health < 3)
-      		localcmd ("restart\n");
-	    else
-	    {
-      	if (self.health < 3 && (self.enemy.owner != self || self.enemy.health < 1))
-               self.lives = self.lives - 1;
+    if (self.lives == 1 && self.health < 3)
+      localcmd ("restart\n");
+    else
+    {
+      if (self.health < 3 && (self.enemy.owner != self || self.enemy.health < 1))
+        self.lives = self.lives - 1;
     
-           setspawnparms (self);     // Now works like coop
-           PutClientInServer ();
-          }
+      setspawnparms (self);     // Now works like coop
+      PutClientInServer ();
+    }
 	}
 };
 
@@ -829,16 +894,11 @@ void() CheckRules =
 
 //============================================================================
 
-string deadstr;
-
 void() PlayerDeathThink =
 {
   local entity  old_self, stemp, e, e2;
   local float   forward, tmp, tmp2;
   local string teststr;
-
-
-    centerprint(self,"/O",deadstr); //Tei
 
 	if ((self.flags & FL_ONGROUND))
 	{
@@ -859,17 +919,11 @@ void() PlayerDeathThink =
     if (!deathmatch && !coop)
     {
       if (self.health < 3 && self.lives == 1)
-	{
         sprint(self, "Game over. Press special or fire to restart\n");
-	 //deadstr = RandomMoron(); //Tei
-	 //centerprint(self, deadstr); //Tei
-	}
       return;
     }
     sprint(self,"Press 1-10 to select your vehicle\n");
     sprint(self,"Press special or fire to start\n"); //, fire to change POV\n");
-
-
 
     if (self.health < 2)
       self.health = 2;
@@ -901,129 +955,61 @@ void() PlayerDeathThink =
     {
       if (!check_allowed(self.impulse))
       {
-        centerprint(self, "Vehicle not available.\n");
+        sprint(self, "Vehicle not available.\n");
         self.impulse = 0;
       }
     }
 
-    if (self.impulse == 1 && self.style != 1)
-    {
-      self.style = 1;
-      centerprint(self, "/AF-16 Dogfighter\n");
-      //GSelected("f16");//Tei
-    }
-    else
     if (self.impulse == 1)
     {
-      self.style = 18;
-      centerprint(self, "/ASU-25 Dogfighter\n");
-      //GSelected("su25");//Tei
+      self.style = 1;
+      sprint(self, "Dogfighter selected.\n");
     }
     else if (self.impulse == 2)
     {
       self.style = 2;
-      centerprint(self, "/AF-14 Fighter Bomber\n");
-      //GSelected("f14");//Tei
+      sprint(self, "Fighter Bomber selected.\n");
     }
     else if (self.impulse == 3)
     {
       self.style = 3;
-      centerprint(self, "/AF-117 Stealth Bomber\n");
-      //GSelected("f117");//Tei
+      sprint(self, "Stealth Fighter selected.\n");
     }
-    else if (self.impulse == 4 && self.style != 4&& self.style != 16)
+    else if (self.impulse == 4)
     {
       self.style = 4;
-      centerprint(self, "/AA-10 Tanks Killer\n");
-      //GSelected("a10");//Tei
+      sprint(self, "A-10 selected.\n");
     }
-	// Tei a40
-    else if (self.impulse == 4 && self.style == 16)
-    {
-      self.style = 17;
-      centerprint(self, "/AA-40 City Killer\n");
-      //GSelected("a40");//Tei
-    }
-	// Tei a40
-
-	// Tei a20
-    else if (self.impulse == 4 )
-    {
-      self.style = 16;
-      centerprint(self, "/AA-20 Mech Killer\n");
-      //GSelected("a20");//Tei
-    }
-	// Tei a20
-
     else if (self.impulse == 5)
     {
       self.style = 5;
-      centerprint(self, "/AF-22 Avanced Fighter\n");
-      //GSelected("f22");//Tei
+      sprint(self, "X-29 selected.\n");
     }
-    else if (self.impulse == 6 && (self.style != 6) && (self.style != 11)&& (self.style != 12) )
+    else if (self.impulse == 6)
     {
       self.style = 6;
-      centerprint(self, "/AHAVOC Defense Copter\n");
-      //GSelected("helo");//Tei
+      sprint(self, "Attack helicopter selected.\n");
     }
     else if (self.impulse == 7)
     {
       self.style = 7;
-      centerprint(self, "/AMSAM Antiair Support\n");
-      //GSelected("msam");//Tei
-
+      sprint(self, "Mobile SAM selected.\n");
     }
     else if (self.impulse == 8)
     {
       self.style = 8;
-      centerprint(self, "/AM-1 Abrams Tank\n");
-      //GSelected("m1");//Tei
+      sprint(self, "Battle Tank selected.\n");
     }
     else if (self.impulse == 9)
     {
       self.style = 9;
-      centerprint(self, "/ABRD Multipurpose Car\n");
-      //GSelected("brd");//Tei
+      sprint(self, "Armoured Car selected.\n");
     }
-    else if (self.impulse == 10 && self.style != 10)
+    else if (self.impulse == 10)
     {
       self.style = 10;
-      centerprint(self, "/AHover MultiTerrain Hover\n");
-      //GSelected("hover");//Tei
+      sprint(self, "Hovercraft selected.\n");
     }
-    else if (self.impulse == 10 && self.style != 13)
-    {
-      self.style = 13;
-      centerprint(self, "/AP8 MultiTerrain Mech\n");
-      //GSelected("mech");//Tei
-    }
-	// Tei apache
-    else if (self.impulse == 6 && self.style == 6 )
-    {
-      self.style = 11;
-      centerprint(self, "/AApache Hunter helicopter \n");
-      //GSelected("apache");//Tei
-    }
-	// Tei apache
-	// Tei comanche
-    else if (self.impulse == 6 && self.style == 11 )
-    {
-      self.style = 12;
-      centerprint(self, "/AComanche Attack helicopter \n");
-      //GSelected("comanche");//Tei
-    }
-	// Tei comanche
-
-	// Tei orca
-    else if (self.impulse == 6 && self.style == 12 )
-    {
-      self.style = 14;
-      centerprint(self, "/AOrca VTOL Hunter\n");
-      //GSelected("orca");//Tei
-    }
-	// Tei orca
-
  
     if (self.impulse == 15)
     {
@@ -1303,13 +1289,7 @@ void() SetCameraPlace =
 
     if (self.missileview_on == 1 && self.lastmiss.origin != '0 0 0' && (self.lastmiss.owner == self || self.lastmiss.owner == self.enemy))
     {
-	stemp = self.lastmiss;
-      //ShowCamo();
-	
-    }
-    else
-    {
-	//UnShowCamo();
+      stemp = self.lastmiss;
     }
 
     makevectors (self.v_angle);
@@ -1326,7 +1306,7 @@ void() SetCameraPlace =
     v_forward = normalize(v2 - v1);
     if (self.enemy != self)
       setorigin(self.oldenemy, trace_endpos - v_forward * 4);
-    if (self.enemy != self && (self.style < 7 || self.enemy.owner != self || self.flycam || self.style == 11 || self.style == 12  || self.style == 14|| self.style == 16|| self.style == 17))//Tei
+    if (self.enemy != self && (self.style < 7 || self.enemy.owner != self))
       setorigin(self, self.oldenemy.origin);
     if (self.enemy.owner == self)
     {
@@ -1395,16 +1375,10 @@ void() PlayerPostThink =
 // aircraft spawn.. 
   if (self.toyview == -1)
   {
-
-    //UnShowSelected();// Tei
-
     self.waterlevel = 0;
     self.watertype = -1;
     if (self.style == 1)
       start_aircraft1 ();
-    else
-    if (self.style == 18) // Tei su25
-      start_aircraft8 (); // Tei su25
     else if (self.style == 2)
       start_aircraft2 ();
     else if (self.style == 3)
@@ -1415,18 +1389,6 @@ void() PlayerPostThink =
       start_aircraft5 ();
     else if (self.style == 6)
       start_helo1 ();
-    else if (self.style == 14)//Tei orca
-      start_helo4 ();// Tei orca
-    else if (self.style == 16)
-    {
-      //self.movetype = MOVETYPE_WALK;
-       start_aircraft6 ();
-    }
-    else if (self.style == 17)
-    {
-      //self.movetype = MOVETYPE_WALK;
-       start_aircraft7 ();
-    }
     else if (self.style == 7)
     {
       self.movetype = MOVETYPE_WALK;
@@ -1444,17 +1406,6 @@ void() PlayerPostThink =
     }
     else if (self.style == 10)
       start_groundveh4 ();
-	// Tei mech
-    else if (self.style == 13)
-     {
-      self.movetype = MOVETYPE_WALK;
-      start_groundveh5 ();
-	}
-	// Tei mech
-    else if (self.style == 11) //Tei apache
-      start_helo2 (); //Tei apache
-    else if (self.style == 12) //Tei apache
-      start_helo3 (); //Tei apache
     else
       start_aircraft1 ();
 
@@ -1466,14 +1417,13 @@ void() PlayerPostThink =
 
   // Create the target box
   // It's called self.trigger_field
-    if (!cvar("no_targetbox"))//Tei
+    if (!(cvar("temp1")&2))
     {
       e = spawn();
       setmodel (e, "progs/s_target.spr");
       setorigin (e, self.enemy.origin);
       e.owner = self;
       self.trigger_field = e;
-      e.drawonlytoclient = self;//Tei
     }
 
     W_SetCurrentAmmo ();

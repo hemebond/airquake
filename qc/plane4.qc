@@ -6,17 +6,13 @@ void() ac4_currentammo =
   self.ammo_cells = self.ammo_smsl;
 
   if (self.weapon == IT_WEP1)
-	//Geapon("auto");
- 	self.weaponmodel = "progs/v_auto.mdl";
+    self.weaponmodel = "progs/v_auto.mdl";
   else if (self.weapon == IT_WEP2)
-	//Geapon("sider");
-  self.weaponmodel = "progs/v_sider.mdl";
+    self.weaponmodel = "progs/v_sider.mdl";
   else if (self.weapon == IT_WEP3)
-	//Geapon("bomb");
-   self.weaponmodel = "progs/v_bomb.mdl";
+    self.weaponmodel = "progs/v_bomb.mdl";
   else if (self.weapon == IT_WEP4)
-    	//Geapon("maver");
-	self.weaponmodel = "progs/v_maver.mdl";
+    self.weaponmodel = "progs/v_maver.mdl";
 };
 
 void() ac4_steer =
@@ -29,19 +25,10 @@ void() ac4_steer =
   Steer_plane (70, 70, 120);
   jet_sound();
 
-  /*
   if (self.health < 20 && stemp.model == "progs/plane4.mdl")
     setmodel(stemp, "progs/plane4b.mdl");
   if (self.health >= 20 && stemp.model == "progs/plane4b.mdl")
     setmodel(stemp, "progs/plane4.mdl");
-  */
-  //FIXME!!
-
-  //Tei
-  //if(stemp.speed>95)
-	//  CopterSparks(stemp);
-  //Tei
-
 
   makevectors(stemp.angles);
   v3 = v_forward;
@@ -57,7 +44,6 @@ void() ac4_steer =
       if (time >= self.pausetime)
         setplanespeed(350, 2, 3);
       stemp.skin = 0;
-	//g_updatesteer(5);//Tei
 //      if (!(temp1&4))
 //        stemp.effects = 4;
     }
@@ -67,8 +53,6 @@ void() ac4_steer =
       {
         tmp = stemp.thru * 62.5;
         setplanespeed(tmp, 2, 2);
-      	//g_updatesteer(4);//Tei FIXME!!
-
       }
 //      stemp.effects = 0;
       if (stemp.skin == 1)
@@ -246,8 +230,7 @@ void() start_aircraft4 =
   // Create the plane
   // self.enemy is your aircraft (or other vehicle?-).
   e = spawn();
-  //setmodel (e, "progs/plane4.mdl");
-  setmodel (e, "newmedia/a10.md2");
+  setmodel (e, "progs/plane4.mdl");
 
   e2 = self.goalentity;  // This is the info_player_* you spawned on.
   setorigin(e, e2.origin);

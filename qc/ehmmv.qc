@@ -242,22 +242,10 @@ void() ehmmv_start =
 
   self.tur1 = spawn();
   setorigin(self.tur1, self.origin);
-  //setmodel(self.tur1, "progs/humtr.mdl");
-  setmodel(self.tur1, "newmedia/brdgun.md2");
-
+  setmodel(self.tur1, "progs/humtr.mdl");
   self.tur2 = spawn();
   setorigin(self.tur2, self.origin);
-
-  //setmodel(self.tur2, "progs/humtb.mdl");
-  setmodel(self.tur2, "newmedia/brdturret.md2");
-
-  self.tur1.aiment = self.tur2;
-  self.tur1.movetype = MOVETYPE_FOLLOW;
-  self.tur1.aiment = self.tur2;
-
-  self.tur2.aiment = self;
-  self.tur2.movetype = MOVETYPE_FOLLOW;
-  self.tur2.aiment = self;
+  setmodel(self.tur2, "progs/humtb.mdl");
 
 	if (self.target)
 	{
@@ -285,9 +273,7 @@ void() monster_ehmmv =
   if (!deathmatch)
     total_monsters = total_monsters + 1;
 
-  //setmodel(self, "progs/humba.mdl");
-  setmodel(self, "newmedia/brd.md2");
-
+  setmodel(self, "progs/humba.mdl");
   setsize (self, '-16 -16 -24', '16 16 8');
   self.view_ofs = '0 0 1';
   if (!self.health)

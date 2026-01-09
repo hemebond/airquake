@@ -1,57 +1,16 @@
-This text contains stuff like entity specs for AirQuake maps, etc. It's
-divided to sections for MODELS, SKINS, and MAPS.
+This text contains entity specs & stuff for AirQuake maps.
 
-Don't send me your stuff as email attachments unless you are a professional
-and have worked for companies like ID software, and Ion Storm. Instead,
-upload them to the net and tell me where to get them.
-
-*MODELS
-
-I still need a few more models for this TC. If you are a good modeller (as
-good or better than me), any help you can give is welcome.
-
-NO BEGINNERS PLEASE! If you think your models are BETTER than mine, then ask
-me if I like them too. A good skin is REQUIRED. The maximum size of the skin
-is 320x200.
-
-I only need decorations at the moment. Those has to be made very simple to
-allow for example small "forests" of trees... Use the skins to make details.
-
-My current model needs:
-- Trees (max 40 polygons each)
-- Radio antennas and stuff (around 30 polygons/model)
-- Stop signs and other signs for cities 
-- Car wrecks, tank wrecks, plane wrecks... To make some feeling of war. :)
-  Max. 500 polygons.
-
-*SKINS
-
-Also, if you are a very good SKIN artist, you might get your work into
-AirQuake. Simply, get a program called XPAK, and unpack the pak0.pak file
-of AirQuake to get the vehicle models. Then draw a new skin(s) for a vehicle
-and send it to me in .GIF format. Here are some rules:
- - For planes, make two skins to make use of the afterburner or stealth mode.
- - For ground vehicles, make a new skin for all parts. (tank*.mdl, msam*.mdl)
- - The skins MUST work perfectly with shirt/pants colours changed.
- - The pants colour has to be clearly visible, and more dominant than the
-   shirt colour.
- - Avoid too dark and too bright colours. Include fullbright "lights" to
-   make it possible to see the vehicle's position in darkness.
- - Preferably use the original cockpits, engines etc. In general, the vehicle
-   should still look like the same vehicle, only with different painting...
-
-The safest vehicle choises for making new skins (these won't change):
- - Dogfighter  (Make also a gray "navy" skin?)
- - Fighter Bomber  (A camo could be nice)
- - Armoured Car  (Camo?)
- - Hovercraft  (Camo?)
+Don't send me your stuff as email attachments Instead, upload them to the
+net and tell me where to get them.
 
 *MAPS
 
 When making maps, you can upload them to:
 ftp://ftp.cdrom.com/pub/idgames2/incoming/
 (Just like any other Quake levels). Please tell me when you do, so I can
-check out your work and probably advertise on AirQuake page.
+check out your work and probably advertise on AirQuake page. When uploading
+AirQuake levels, you have to also upload a text file that clearly says the
+level is for AirQuake...
 
 Architectural recommendations:
  - 128 units is the minimum width/height of a tunnel you can fly through, and
@@ -62,7 +21,7 @@ Architectural recommendations:
    where the planes need to turn. (ie. practically any place. One-way tunnels
    are not fun in DM)
  - A "room" 3000-4000 units across is around the maximum you can get without
-   grayflash, unless you use a lot of water and sky. (which sucks in GL)
+   greyflash, unless you use a lot of water and sky. (which sucks in GL)
  - The Quake map size limits are from -4096 to 4096 in x,y,z coordinates.
  - Try to avoid really huge open areas. My test map (Air1) runs very slow
    in some places, and especially when there are some particle explosions
@@ -317,8 +276,3 @@ OTHER
   You can set the "wait" field to set how many seconds it will take for
   an entity to respawn in deathmatch. This includes exploding walls,
   runways, AA turrets, SAM launchers and Radars.
-
-*SOUNDS
-
-Hehe, I got people making them already. Let's see if I get everything from
-them. :)

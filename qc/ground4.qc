@@ -1,9 +1,3 @@
-/////////////////////
-//  
-//  ground4: HOVER
-//  
-/////////////////////
-
 void() gv4_steer =
 {
   local entity veh;
@@ -12,9 +6,6 @@ void() gv4_steer =
   local float tmp, f1, f2;
 
   veh = self.enemy;
-
-  //if(self.enemy.thru>0)
-	//  CopterSparks(veh);
 
   tmp=veh.speed / ((veh.thru + 1) * 6);
   tmp=floor(tmp);
@@ -136,7 +127,7 @@ void() gv4_steer =
     if (veh.speed)
     {
       self.armorvalue = vlen(self.velocity) / 3.3;
-      veh.frame = 1;//Tei
+      veh.frame = 1;
     }
     else
     {
@@ -288,16 +279,12 @@ void() gv4_currentammo =
   self.ammo_cells = self.ammo_smsl;
 
   if (self.weapon == IT_WEP1)
-	//Geapon("auto");
     self.weaponmodel = "progs/v_auto.mdl";
   else if (self.weapon == IT_WEP2)
-	//Geapon("plasma");
     self.weaponmodel = "progs/v_plas.mdl";
   else if (self.weapon == IT_WEP3)
-	//Geapon("rockets");
     self.weaponmodel = "progs/v_rock.mdl";
   else if (self.weapon == IT_WEP4)
-	//Geapon("hellfire");
     self.weaponmodel = "progs/v_hell.mdl";
 };
 // HOVER

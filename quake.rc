@@ -11,9 +11,6 @@ exec aqalias.cfg
 // run a user script file if present
 exec autoexec.cfg
 
-
-sv_stepsize 18
-
 //
 // stuff command line statements
 //
@@ -21,4 +18,3 @@ stuffcmds
 
 // start demos if not allready running a server
 startdemos demo1 demo2 demo3
-demos

@@ -96,7 +96,7 @@ void() T_DroneTouch =  // Crash
       }
     }
     T_Damage(self,self,self,1000);   
-    //setmodel(self,"newmedia/f18.md2");//FIXME tei
+    setmodel(self,"progs/plane1b.mdl");
 
     self.touch = T_DroneTouch;
     AC_Fall ();
@@ -111,7 +111,7 @@ void() drone_die =
 	WriteCoord (MSG_BROADCAST, self.origin_y);
 	WriteCoord (MSG_BROADCAST, self.origin_z);
 
-  setmodel(self,"newmedia/f18.md2");
+  setmodel(self,"progs/plane1b.mdl");
 
   self.th_die = AC_Explode;
   self.touch = T_DroneTouch;
@@ -190,10 +190,15 @@ void() drone_fly =
       self.flags = self.flags - FL_ONGROUND;
       self.groundentity = world;
     }
+    if (self.health < 40)
+    {
+      if (self.model == "progs/plane1.mdl")
+        setmodel(self, "progs/plane1b.mdl");
+    }
     if (ab) 
     {
       self.skin = 1;
-      //if (!(temp1&4))//FIXME
+      if (!(temp1&4))
         self.effects = 4;
     }
     else
@@ -262,7 +267,7 @@ void() monster_drone =
 	self.solid = SOLID_SLIDEBOX;
   self.movetype = MOVETYPE_FLY;
 
-  setmodel (self, "newmedia/f18.md2");
+  setmodel (self, "progs/plane1.mdl");
   setsize (self, '-16 -16 -16', '16 16 16');
   if (!self.health)
     self.health = 200;

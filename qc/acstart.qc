@@ -5,7 +5,7 @@ void() start_aircraft =
   // Create the plane
   // self.enemy is your aircraft (or other vehicle?-).
   e = spawn();
-  setmodel (e, "newmedia/f18.md2");
+  setmodel (e, "progs/plane1.mdl");
 
   e2 = self.goalentity;  // This is the info_player_* you spawned on.
   setorigin(e, e2.origin);

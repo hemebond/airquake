@@ -26,9 +26,9 @@ vector(float minim, float maxdist) Drone_aim =
     if (e.health && (e.movetype != MOVETYPE_FLY || (flg & 1) == 0 ) )
     {
       traceline (org, self.enemy.origin, TRUE, world);
-      //if (e.model == f117)
-      //  if (e.skin == 1 && random() < 0.5)
-      //    trace_fraction = 0;
+      if (e.model == "progs/plane3.mdl")
+        if (e.skin == 1 && random() < 0.5)
+          trace_fraction = 0;
       if (trace_fraction == 1)
       {
         v2 = normalize (org - self.origin);
@@ -368,15 +368,6 @@ void() T_hedroneTouch =  // Crash
 	WriteCoord (MSG_BROADCAST, self.origin_y);
 	WriteCoord (MSG_BROADCAST, self.origin_z);
 
-	// Tei
-	//WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-	//WriteByte (MSG_BROADCAST, TE_EXPLOSIONSMALL3);
-	//WriteCoord (MSG_BROADCAST, self.origin_x);
-	//WriteCoord (MSG_BROADCAST, self.origin_y);
-	//WriteCoord (MSG_BROADCAST, self.origin_z);
-	// Tei
-
-
 //  self.health = 0;
   T_Damage(other,self,self,240);
 
@@ -438,11 +429,8 @@ void() hedrone_die =
 
   self.pain_finished = time + 0.3;
 
-  /* 
- if (self.model == "progs/helo1.mdl")
+  if (self.model == "progs/helo1.mdl")
     setmodel(self, "progs/helo1b.mdl");
- */
-  //FIXME
 
   self.touch = T_hedroneTouch;
   HE_Fall ();
@@ -698,11 +686,7 @@ void() monster_helo =
 	self.solid = SOLID_SLIDEBOX;
   self.movetype = MOVETYPE_FLY;
 
-  //setmodel (self, "progs/helo1.mdl");
-
-  setmodel (self, "newmedia/apache.md2");
-  GimmeRotor(self, "newmedia/aparotors.md2"); // Tei
-
+  setmodel (self, "progs/helo1.mdl");
   setsize (self, '-16 -16 -16', '16 16 16');
   self.view_ofs = '0 0 1';
   if (!self.health)

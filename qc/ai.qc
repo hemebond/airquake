@@ -435,11 +435,11 @@ float() FindTarget =
     if (client.pdmg > client.health * 1.5)
       return FALSE;
 
-//    if (client.model == f117)
-//    {
-//      if (client.unstealth_finished < time)
-//        return FALSE;
-//    }
+    if (client.model == "progs/plane3.mdl" || client.model == "progs/plane3b.mdl")
+    {
+      if (client.unstealth_finished < time)
+        return FALSE;
+    }
 
     if (r == 4)
       return FALSE;

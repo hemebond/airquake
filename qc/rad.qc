@@ -40,10 +40,9 @@ float() RadFindTarget =
       {
         if (e.health > 0 && e.classname != "player")
         {
-          //if (e.model == f117 && e.unstealth_finished > time)
-          if (e.unstealth_finished > time)
+          if (e.model == "progs/plane3.mdl" && e.unstealth_finished > time)
             self.impulse = self.impulse; // yeah!
-          else if (e.model == "newmedia/brd.mdl" && e.owner.attack_finished < time && e.owner.style == 9)
+          else if (e.model == "progs/humba.mdl" && e.owner.attack_finished < time && e.owner.style == 9)
             self.impulse = self.impulse;
           else
           {
@@ -74,7 +73,7 @@ float() RadFindTarget =
                   else if (e.owner.style == 4)
                     teamprint(self,"Bomber (");
                   else if (e.owner.style == 5)
-                    teamprint(self,"F-22 (");
+                    teamprint(self,"X-29 (");
                   else if (e.owner.style == 6)
                     teamprint(self,"Helicopter (");
                   else
@@ -154,8 +153,7 @@ void() rad_stand     =[      0,       rad_stand    ] {
       self.enemy = world;
     if (self.enemy.health < 1)
       self.enemy = world;
-    //if (self.enemy.model == f117 && self.enemy.unstealth_finished < time)
-    if (self.enemy.unstealth_finished < time)
+    if (self.enemy.model == "progs/plane3.mdl" && self.enemy.unstealth_finished < time)
       if (random() < 0.2)
         self.enemy = world;
   }
