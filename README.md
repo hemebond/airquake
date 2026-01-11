@@ -1,7 +1,8 @@
-AIRQUAKE 1.03 (10/18/1999)
-by Iikka Keranen
-fingers@mail.planetquake.com
-http://www.planetquake.com/ikq/airquake.htm
+# AirQuake 1.03 (10/18/1999)
+
+by [Iikka Keranen](fingers@mail.planetquake.com) (http://www.planetquake.com/ikq/airquake.htm)
+
+![screenshot](.github/air2_2026-01-12_00-29-11.jpg)
 
 This is a "total conversion" with players replaced by fighter planes and
 other military vehicles, and monsters replaced by similar vehicles or ground
@@ -13,54 +14,33 @@ action game with some simulator-like features. The controls etc are very
 simple, as you'll see. This doesn't mean the enemies are easy to kill though.
 They have as good weapons as you...
 
-**WHAT'S NEW (since 1.02)
+## What's New (since 1.02)
 
 - Fixed the bug with fatally mixed-up player starts (hopefully).
 - Added "strafe" for the hovercraft (similar to the chopper... nice for sharp turns).
 - Added chassis control for ground vehicles (uses the roll/strafe keys).
 
-
-**INSTALLING & RUNNING
+## Installing and Running
 
 - To install the TC you simply have to unzip all the files to directory
-  quake/airquake/
+  `quake/airquake/`
+
 - You can run AirQuake either by running your Quake client with command line
-  parameter -game airquake (e.g. c:\quake>winquake -game airquake), or by
-  running one of the bat files included:
-  WAQ.BAT : Run AirQuake using WinQuake.exe  (requires latest winquake)
-  AQ.BAT  : Run using Quake.exe  (DOS, no internet play)
-  AQ95.BAT: Run using Q95.bat    (internet play under win95)
+  parameter `-game airquake` (e.g. `c:\quake>winquake -game airquake`)
+
 - Once the game has started and is playing the demos, you can start a game
-  from the console (~ key) by typing: map <mapname>  , where <mapname> is
-  any AirQuake level. E.g. map air2  or map aircity .
+  from the console (`~` key) by typing: `map <mapname>`, where `<mapname>` is
+  any AirQuake level. E.g. `map air2` or `map aircity`.
 
-  See RULES section below for DM settings etc.
+  See [Rules](#rules) section below for DM settings etc.
 
-GLQUAKE
+## Playing
 
-  Get the newest GLQuake to make AirQuake run at acceptable speed. Here are
-  instructions to speed it up (from Adam Haun.. thanks):
+This section tells you how to play with the included autoexec.cfg, that has all the necessary controls bound to mouse and keyboard.
 
-  "First of all, set gl_subdivide_size to 4096. Set gl_polyblend to 0. Set
-  gl_flashblend to 1. This improves speed enormously. The only problem is
-  that on levels with an especially long viewing range(air3) there is a
-  Hall of Mirrors-like effect at the extreme end of your vision."
+### Quick Start
 
-  When installing a new version of AirQuake with possibly changed models,
-  ALWAYS delete the glquake directory where it stores mesh files. Otherwise
-  it would mess up all changed models by mixing them to the old versions.
-
-  Warning: despite of this tweaking, the performance in OpenGL mode is not
-  very good due to the way it handles the sky and large areas in general.
-
-**PLAYING
-
-  This section tells you how to play with the included autoexec.cfg, that
-  has all the necessary controls bound to mouse and keyboard.
-
-QUICK START
-
-  Here is a simple example of a flight in AirQuake. By following these
+Here is a simple example of a flight in AirQuake. By following these
 instructions, you can bomb the enemy radar base in Air3. The third demo
 shows this flight in action, so sit down and watch it if you didn't
 understand something...
@@ -101,39 +81,54 @@ stop quickly enough, speed up with key W and take off (to try again).
 When stopped on the runway, set about 25% throttle and drive to the repair
 spot under the bridge to rearm.
 
-CONTROLS
+### Controls
 
 - Steer your vehicle with mouse, or turning keys and look up/down. Vehicles
   don't turn instantly, but at speed depending on the vehicle type. Basically
   you tell the pilot or driver where to go by looking somewhere, and he just
   follows these orders.
+
 - Tilting a helicopter up or down makes it move backward or forward.
-- Press right mouse button (+jump) to use the special ability of your vehicle.
+
+- Press right mouse button (`+jump`) to use the special ability of your vehicle.
   This may for example turn on afterburner, or open stealth fighter's weapon
   bay doors. Helicopters and ground vehicles move to where you are looking,
   when you press special. For example, if you look back and press this
   button, your tank reverses (Hovercraft only moves forward). This button
   is also used for respawning.
-- All vehicles have throttle settings. Press W to decrease, and S to increase
+
+- All vehicles have throttle settings. Press `W` to decrease, and `S` to increase
   throttle. With helicopters and hover, this is used for moving up and down.
+
 - Aircraft have additional left/right movement keys. Press:
-  A (+extraleft)   to strafe/roll left. (helicopter/plane)
-  D (+extraright)  to strafe/roll right.
+
+  `A` (+extraleft)   to strafe/roll left. (helicopter/plane)
+
+  `D` (+extraright)  to strafe/roll right.
+
 - Change views by pressing:
-  Q (bound to +freelook) to freely look around with mouse. The vehicle's
+
+  `Q` (bound to `+freelook`) to freely look around with mouse. The vehicle's
     direction is "locked" and it goes straight while you press this key.
     Helicopter stops moving unless you press special key to move it.
     Release the key to return the controls. Freelook is good for locking
     missiles to targets in any direction with some planes, as well as for
     turning tank's turret while going straight, and landing with a chopper.
-    (+lookleft) to look left. Release to return to the normal front view.
-    (+lookback) to look back.
-    (+lookright) to look right.
-  Z (+cczoomin) to zoom in.
-  X (+cczoomout) to zoom out.
-  C (liftcam) to move camera up. Cycles through 5 positions. I added this as
+
+    (`+lookleft`) to look left. Release to return to the normal front view.
+
+    (`+lookback`) to look back.
+
+    (`+lookright`) to look right.
+
+  `Z` (+cczoomin) to zoom in.
+
+  `X` (+cczoomout) to zoom out.
+
+  `C` (liftcam) to move camera up. Cycles through 5 positions. I added this as
     the hummer is hard to see in the default camera position. :)
-  E (lockturret) is not actually a camera option, but somewhat related, as
+
+  `E` (lockturret) is not actually a camera option, but somewhat related, as
     it's mostly used for taking screenshots. :) Basically it locks the turret
     to the current direction and then you can see it from front... I've found
     a practical use for this too: In AIRCITY, lock your tank guns upward, then
@@ -144,43 +139,60 @@ CONTROLS
     enemy automatically if possible.
 
     E key is also used for cycling between defence turrets while you're not
-    in a vehicle and your side has active turrets. (e.g. Air2 level)
-  9 (impulse 9) toggles missile view. Usable for the hummer's bomb...
+    in a vehicle and your side has active turrets. (e.g. `air2` level)
+
+  `9` (impulse 9) toggles missile view. Usable for the hummer's bomb...
+
 - Press number keys to select weapons. More about them in Vehicles section.
-- Commands "cycleweapon" and "cycleweapon2" work like the cycle command in
+
+- Commands `cycleweapon` and `cycleweapon2` work like the cycle command in
   normal Quake... I'm not using them so they aren't bound to any keys. Bind
-  them yourself. 
-- Number 5 drops a flare (or shoots upward if a ground vehicle), that has
+  them yourself.
+
+- Number `5` drops a flare (or shoots upward if a ground vehicle), that has
   50% chance to get missiles out of your tail.
-- Press number 6 to set weapon model (big/small/none). The small version is
+
+- Press number `6` to set weapon model (big/small/none). The small version is
   mostly for high resolutions and GLquake, it's too small in 320x200.
+
 - Before each respawn (while dead), you can select vehicles with the numbers.
-- You can also switch your skin by typing "impulse 15" into console between
+
+- You can also switch your skin by typing `impulse 15` into console between
   respawns. Currently there's an alternate skin for dogfighter only.
+
 - When you are stopped at rearm/repair spot with 100% health, you can
-  re-select your vehicle by pressing 0 (impulse 10), and then vehicle number.
+  re-select your vehicle by pressing `0` (`impulse 10`), and then vehicle number.
+
 - When you're dead, you can switch teams in teamplay DM by selecting a new
-  colour. Type into console "color 2" for blue, and "color 7" for red team.
+  colour. Type into console `color 2` for blue, and `color 7` for red team.
   Don't do this when you're alive, or the game doesn't recognize the team
   change. (It should force the colours back to that of your team, but it has
   problems on dedicated servers)
+
 - All the weapons except bombs auto-aim into ground targets, and homing
   missiles can be locked into planes as well. Slow missiles like mavericks
   aren't too good in shooting planes though.
+
 - The red targeting box shows the direction where you are flying/shooting,
   except in the stealth mode.
+
 - When the targeting box changes to different shape and moves on a target,
-  you have gained a weapon lock. 
+  you have gained a weapon lock.
+
 - The drone planes fly around following their routes. At first, they don't
   use afterburner, but if they take some damage, they start to use it...
+
   They have no AI yet, but I'm going to make some.
+
 - The enemy helicopters have (almost) finished AI, they can really hunt you
-  down and kill. They have a bit limited aiming skills for now though. 
+  down and kill. They have a bit limited aiming skills for now though.
+
 - You can land on a special runway brush. Simply fly above it and reduce
   throttle, if you're in a helicopter... With planes, come down as slowly
   as possible, and don't turn at the moment when you touch the ground.
   Landing or taxiing outside a runway kills you. (Ground vehicles can of
   course travel anywhere on the ground)
+
 - Ground vehicles can travel in shallow water without any problems. If they
   become (almost) completely submerged, they start to get heavy damage. The
   tank may survive for 10 seconds... Humvee can now drive underwater for
@@ -194,24 +206,24 @@ Radio Communications:
 There are many radio messages in the airsay.rc. They are only sent to the
 players of your team in teamplay DM, so you can communicate relatively safe.
 Read the airsay.txt and examine airsay.rc to find more info about impulses
-etc... Basically, everything is bound to keys F1-F8, and pressing F1 shows
+etc... Basically, everything is bound to keys F1-F8, and pressing `F1` shows
 you what the others do.
 
-RULES
+### Rules
 
-  This section contains descriptions for different game modes of AirQuake.
+This section contains descriptions for different game modes of AirQuake.
 
 - Single player and Co-op game modes work like usual. (Except there are no
   many co-op starts in the levels, so you may get "telefrag" problems. Move
   away after starting)
-- All monsters are now removed from deathmatch mode, EXCEPT if you have
+- All monsters are now removed from deathmatch mode, _except_ if you have
   teamplay on, and the monsters belong in either team. (Defence turrets)
 - Teamplay 1 turns on the team rules:
   * When a new player connects, he joins the team with least players.
   * Players always respawn at their own base.
   * Before respawns, you can change your team if you want. Please don't use
     this excessively, other players might not like it. Simply change your
-    color to join another team. ("color 2" in console for blue, 7 for red)
+    color to join another team. (`color 2` in console for blue, 7 for red)
   * Killing a teammate lowers your frag count.
   * Certain maps may contain people ("enemy officers") you can pick up. Bring
     them to an officer of your team to gain 10 frags, and 5 frags to other
@@ -223,90 +235,98 @@ RULES
   because in AirQuake it's very easy to kill yourself. Now people sometimes
   have positive frags...
 
-SERVER
+### Server
 
-  Here are some server options that are set by console variables.
+Here are some server options that are set by console variables.
 
-Variable "temp1": Type "temp1 <number>" to set these options. Add numbers
-together to use many options. "temp1 15" would turn on all the options below.
-  1: Double weapons.
-  2: Remove targeting box.
-  4: Remove bright light effect from afterburners. RECOMMENDED FOR GL USERS!
-  8: Prevent locking weapons into friendly targets.
+Variable `temp1`: Type `temp1 <number>` to set these options. Add numbers
+together to use many options. `temp1 15` would turn on all the options below.
 
-Variable "noexit": This is no more used to prevent exiting from level, but
+- `1` Double weapons.
+- `2` Remove targeting box.
+- `4` Remove bright light effect from afterburners. **Recommended for GL users!**
+- `8` Prevent locking weapons into friendly targets.
+
+Variable `noexit`: This is no more used to prevent exiting from level, but
 for level cycling on servers. Set noexit to the number of levels, and put
 config files map00.cfg - mapNN.cfg in the airquake directory. These cfg files
-contain line "changelevel mapname".
+contain line `changelevel mapname`.
 
 If you want to enable remote server options, get a password number with 6
-digits, multiple it by 256 and add to the noexit. In the game, type "impulse
-99" and then type the password by number keys (impulse 1-10). It must be
-6 digits, for example "000245"... This brings you to the admin menu which is
+digits, multiple it by 256 and add to the noexit. In the game, type `impulse
+99` and then type the password by number keys (impulse 1-10). It must be
+6 digits, for example `000245`... This brings you to the admin menu which is
 controlled by numbers in the same way. For example, press 1 for kick command,
 then 07 to kick 7th player. Some commands take 3 digits (frag/timelimit).
 Press 9 to quit from admin menu. Once you have been there, you can always get
 back by impulse 99 without the password. (Warning: you can get strange
 results with passwords above 131071, apparently Quake uses 25-bit numbers..)
 
-An example command line:
+An example command line (divided on several lines for easier reading..):
 
-(divided on several lines for easier reading..)
-Quake -dedicated 16
+```
+quake -dedicated 16
       -game airquake
       +deathmatch 1
       +noexit 28444420       [ 256*111111 + 4 ]
       +timelimit 30
       +map air1
+```
 
 This uses files map00.cfg to map03.cfg to set up a regular deathmatch game
 that cycles through 4 levels, playing for 30 minutes in each. These .cfg
 files are included, they cycle all the four levels. The .cfg files may also
 contain commands to switch on/off teamplay, change timelimits etc. The
-admin password in this example is 111111.
+admin password in this example is `111111`.
 
-VEHICLES
+### Vehicles
 
-  There are SIX different aircraft and FOUR ground vehicles. When the game
+There are _six_ different aircraft, and _four_ ground vehicles. When the game
 starts, you can select which one to use, unless set otherwise in the map
 file. The vehicles have many different features, and they have different
 roles in the game in team play... Now, to the specs:
 
-Vehicle 1: Dogfighter
+#### Vehicle 1: Dogfighter
 
-  This plane is an air superiority fighter, with weapons for little more than
+This plane is an air superiority fighter, with weapons for little more than
 air-to-air battles. Relatively fast, and can outturn almost anything.
-  Speed:
-  0.9 mach, with afterburner: 1.5 mach.
-  Weapons:
-  1: Vulcan cannon (AA). Ammo: 200
-  2: 37mm Rockets (AA/AS). Rapid fire. Ammo: 10
-  3: Sidewinder missiles (AA), speed 2.4 mach. Moderate damage. Ammo: 4
-  4: AMRAAM missiles (AA), speed 3 mach. Long range, Good damage. Ammo: 4
-  Health: 200
-  Armour: 0
 
-Vehicle 2: Fighter Bomber
+Speed: 0.9 mach, with afterburner: 1.5 mach.
 
-  This is a ground assault fighter, with weapons for both air-to-air and
+Weapons:
+1. Vulcan cannon (AA). Ammo: 200
+2. 37mm Rockets (AA/AS). Rapid fire. Ammo: 10
+3. Sidewinder missiles (AA), speed 2.4 mach. Moderate damage. Ammo: 4
+4. AMRAAM missiles (AA), speed 3 mach. Long range, Good damage. Ammo: 4
+
+Health: 200
+
+Armour: 0
+
+#### Vehicle 2: Fighter Bomber
+
+This is a ground assault fighter, with weapons for both air-to-air and
 air-to-surface missions. As it's a lot heavier than the dogfighter, its
 turning ability and speed are not as good. To compensate this problem, the
 plane is equipped with a high-tech look-it-shoot-it helm sight... However,
 it doesn't help that much if the enemy is behind you. Try to shoot from
 distance and avoid real dogfights.
-  Speed:
-  0.85 mach, with afterburner: 1.35 mach.
-  Weapons:
-  1: Autocannon (AA). Ammo: 50
-  2: Sidewinder missiles (AA). Ammo: 4
-  3: Bombs (AS). Ammo: 4
-  4: Maverick missiles (AS). speed 1.5 mach, heavy damage. Ammo: 4
-  Health: 250
-  Armour: 0
 
-Vehicle 3: Stealth Fighter
+Speed: 0.85 mach, with afterburner: 1.35 mach.
 
-  This is a flying piece of state of the art technology. Unfortunately, it
+Weapons:
+1. Autocannon (AA). Ammo: 50
+2. Sidewinder missiles (AA). Ammo: 4
+3. Bombs (AS). Ammo: 4
+4. Maverick missiles (AS). speed 1.5 mach, heavy damage. Ammo: 4
+
+Health: 250
+
+Armour: 0
+
+#### Vehicle 3: Stealth Fighter
+
+This is a flying piece of state of the art technology. Unfortunately, it
 can't take as big payload as A-10. While it's a bit easier to fly than the
 A-10 plane, it has no afterburner. Instead, the special key opens up weapon
 bays to make you able to shoot. When the bays are closed, the plane is
@@ -317,19 +337,22 @@ single buildings). The paveway bomb can be locked to anything you can see,
 but it's not very useful against moving targets as it glides so slowly.
 However, the enemy gets no "incoming missile" warning from this bomb, and
 it's hard to see as it doesn't have a visible glowing rocket engine...
-  Speed:
-  0.9 mach.
-  Weapons:
-  1: Autocannon (AA). Ammo: 50
-  2: Sidewinder missile (AA). Ammo: 4
-  3: Paveway laser guided bomb (AS). Ammo: 4
-  4: Maverick missiles (AS). Ammo: 4
-  Health: 200
-  Armour: 0
 
-Vehicle 4: A-10 Ground attack plane
+Speed: 0.9 mach.
 
-  This is what the name says. The nightmare of any ground forces, A-10 has
+Weapons:
+1. Autocannon (AA). Ammo: 50
+2. Sidewinder missile (AA). Ammo: 4
+3. Paveway laser guided bomb (AS). Ammo: 4
+4. Maverick missiles (AS). Ammo: 4
+
+Health: 200
+
+Armour: 0
+
+#### Vehicle 4: A-10 Ground attack plane
+
+This is what the name says. The nightmare of any ground forces, A-10 has
 tough armor enough to survive all but the most extreme anti-aircraft fire,
 and huge load of hard-hitting weapons. Just the 5-barreled 30mm long range
 autocannon with exploding shells is enough for most of the targets. If it's
@@ -337,55 +360,65 @@ not, you have all the heavy stuff like hellfires and bombs. It's not really
 recommended to try this plane out in deathmatch as it doesn't have dogfight
 abilities, but it can take incredible amounts of punishment, and in the
 hands of a skillful pilot, the said autocannon tears planes apart...
-  Speed:
-  0.75 mach, with afterburner: 1.05 mach.
-  Weapons:
-  1: Autocannon (AA/AS). Ammo: 50
-  2: Sidewinder missile (AA). Ammo: 2
-  3: Free fall bombs (AS). Heavy damage. Ammo: 6 (spends 2 per 4 bombs)
-  4: Maverick missile (AS). Speed 1.5 mach, heavy damage. Ammo: 6
-  Health: 350
-  Armour: 15
+
+Speed: 0.75 mach, with afterburner: 1.05 mach.
+Weapons:
+1. Autocannon (AA/AS). Ammo: 50
+2. Sidewinder missile (AA). Ammo: 2
+3. Free fall bombs (AS). Heavy damage. Ammo: 6 (spends 2 per 4 bombs)
+4. Maverick missile (AS). Speed 1.5 mach, heavy damage. Ammo: 6
+
+Health: 350
+
+Armour: 15
+
 (A-10 model made by Matt "Mix" Fox, skinned by Iikka Ker„nen)
 
-Vehicle 5: X-29 experimental fighter     
+#### Vehicle 5: X-29 experimental fighter
 
-  This is something that will make today's dogfight planes obsolote in the
+This is something that will make today's dogfight planes obsolote in the
 near future. It turns faster than any other plane, and it has some high tech
 weaponry. But, since this is an experimental prototype of a future fighter,
 it has its flaws. The most important are light weapon load and fragile
 electronics that make this plane vulnerable.
-  Speed:
-  0.9 mach, with afterburner: 1.5 mach.
-  Weapons:
-  1: Autocannon (AA). Ammo: 100
-  2: Plasma cannons (AA). Ammo: 40
-  3: Mini missiles (AA/AS). Rapid fire homing rockets. Ammo: 8
-  4: Sidewinder missiles (AA). Uses "helm sight". Ammo: 4
-  Health: 170
-  Armour: 0
+
+Speed: 0.9 mach, with afterburner: 1.5 mach.
+
+Weapons:
+1. Autocannon (AA). Ammo: 100
+2. Plasma cannons (AA). Ammo: 40
+3. Mini missiles (AA/AS). Rapid fire homing rockets. Ammo: 8
+4. Sidewinder missiles (AA). Uses "helm sight". Ammo: 4
+
+Health: 170
+
+Armour: 0
+
 (X-29 model made by Matt "Mix" Fox, skin modified by Iikka Ker„nen)
 
-Vehicle 6: Attack Helicopter
+#### Vehicle 6: Attack Helicopter
 
-  This is a very fast and powerful helicopter, that relies on its huge load
+This is a very fast and powerful helicopter, that relies on its huge load
 of rockets when fighting against ground targets. It's also capable of self-
 defense against fighter planes... not least because of the different way it
 moves. You can get into places where jets can't shoot you, and the chopper
 turns really fast. Also, the helicopter is ideal for picking up stuff.
-  Speed:
-  depends on the pitch angle... slow compared to the jet fighters.
-  Weapons:
-  1: Autocannon (AA). Ammo: 50
-  2: 37mm Rockets (AA/AS). Ammo: 16
-  3: Sidewinder missile (AA). Ammo: 4
-  4: Hellfire missile (AA/AS). Faster than Maverick, less damage. Ammo: 4
-  Health: 200
-  Armour: 0
 
-Vehicle 7: Mobile SAM vehicle
+Speed: depends on the pitch angle... slow compared to the jet fighters.
 
-  Although this vehicle travels at the speed of 200mph in the AirQuake scale,
+Weapons:
+1. Autocannon (AA). Ammo: 50
+2. 37mm Rockets (AA/AS). Ammo: 16
+3. Sidewinder missile (AA). Ammo: 4
+4. Hellfire missile (AA/AS). Faster than Maverick, less damage. Ammo: 4
+
+Health: 200
+
+Armour: 0
+
+#### Vehicle 7: Mobile SAM vehicle
+
+Although this vehicle travels at the speed of 200mph in the AirQuake scale,
 It doesn't look like that. Basically, it's very slow compared to anything
 that flies. However, it has the double-barreled rapid-fire SAM launcher on
 its side, and lots of armour. If you run out of missiles, you have an auto-
@@ -395,17 +428,21 @@ when it's hovering above you! :)  In DM, you have to make good use of the
 terrain, keep close to places where you can hopefully hide. If you're caught
 in the middle of an open field, you're going to know what "sitting duck"
 means.
-  Weapons:
-  1: Autocannon (SA/SS). Ammo: 200
-  2: SAM missiles (SA/SS). Ammo: 16
-  Health: 400
-  Armour: 15
-Notice that, while you can use the weapons against ground targets, they're
+
+Weapons:
+1. Autocannon (SA/SS). Ammo: 200
+2. SAM missiles (SA/SS). Ammo: 16
+
+Health: 400
+
+Armour: 15
+
+Note that, while you can use the weapons against ground targets, they're
 not very powerful. Tanks are better for ground fights.
 
-Vehicle 8: Battle Tank
+#### Vehicle 8: Battle Tank
 
-  This is what many people have asked me to do. It's slow of course, but it
+This is what many people have asked me to do. It's slow of course, but it
 actually does have armour, and very powerful weapons for ground fights. Now
 you can do a map completely on ground. :)  This is pretty good against enemy
 helicopters too, but there are only a few homing missiles... and since you
@@ -414,17 +451,20 @@ Again, make use of the terrain... In Air2, attack from tunnels and behind
 corners, so that the enemy looks elsewhere when you shoot your missiles. And
 finally, learn to use your Big Gun. Its range is very long, and you can shoot
 to/from behind obstacles. (I have even killed planes with it. ;)
-  Weapons:
-  1: Autocannon (SA/SS). Ammo: 100
-  2: Plasma Cannons (SA/SS). Ammo: 30
-  3: 110mm Cannons (SS). Ballistic projectiles, extreme damage. Ammo: 60
-  4: SAM missile (SA/SS). Ammo: 6
-  Health: 600
-  Armour: 20
 
-Vehicle 9: Armoured Car
+Weapons:
+1. Autocannon (SA/SS). Ammo: 100
+2. Plasma Cannons (SA/SS). Ammo: 30
+3. 110mm Cannons (SS). Ballistic projectiles, extreme damage. Ammo: 60
+4. SAM missile (SA/SS). Ammo: 6
 
-  Yes, it is a Humvee all right. I just don't call it so. :)  This car is
+Health: 600
+
+Armour: 20
+
+#### Vehicle 9: Armoured Car
+
+Yes, it is a Humvee all right. I just don't call it so. :)  This car is
 a bit faster than the heavy vehicles, but it has almost no hope in any real
 battle. The top-mounted turret is basically there for self defense. Your main
 weapons are the mines and the huge bomb. You can kill anything by laying 6
@@ -433,21 +473,25 @@ gets too close and BOOM. Of course, if you drop your explosives on open
 ground they'll see them and shoot them. In AirCity it's a good idea to place
 this stuff behind a corner, so that the enemy can't see it until it's too
 late. And yes, one maverick or hellfire kills the car.
-  Weapons:
-  1: Machine gun (SA/SS). Ammo: 100
-  2: Stinger missile (SA). Light, quick missiles. Ammo: 8
-  3: Land mines (SS). Ammo: 6
-  4: Remote-Controlled Bomb (SS). Ammo: 2. Press fire again to detonate.
-  Health: 150
-  Armour: 5
+
+Weapons:
+1. Machine gun (SA/SS). Ammo: 100
+2. Stinger missile (SA). Light, quick missiles. Ammo: 8
+3. Land mines (SS). Ammo: 6
+4. Remote-Controlled Bomb (SS). Ammo: 2. Press fire again to detonate.
+
+Health: 150
+
+Armour: 5
+
 Note that mines and remote bombs explode after 2 minutes. This is needed to
 reduce the lag. For the same reason I have limited number of mines per player
 to 10. Your mine launcher jams when you have 10 mines laying around. You can
 use it again when some of your older mines are destroyed.
 
-Vehicle 10: Hovercraft
+#### Vehicle 10: Hovercraft
 
-  I don't know if hovers are used in military anywhere, but I added it as
+I don't know if hovers are used in military anywhere, but I added it as
 it's a cool idea and somewhat useful if there's water in the level. It's
 a bit like the tank in the way it has mostly ground weapons, and it has
 a turret. But it has less armour, and is a LOT faster except when climbing
@@ -460,20 +504,22 @@ doors, of course...
 The new, improved version of the hover has tilt control similar to helicopters.
 This can be used to (slowly) move sideways, or to help in tight turns. Tilting
 above water can be dangerous, since it causes the vehicle to slightly sink.
-  Weapons:
-  1: Machine gun (SA/SS). Ammo: 100
-  2: Plasma cannons (SA/SS). Ammo: 40
-  3: Rockets (SA/SS). Ammo: 10
-  4: Hellfire missile (SS). Ammo: 6
-  Health: 300
-  Armour: 10
 
-**CONTACTING
+Weapons:
+1. Machine gun (SA/SS). Ammo: 100
+2. Plasma cannons (SA/SS). Ammo: 40
+3. Rockets (SA/SS). Ammo: 10
+4. Hellfire missile (SS). Ammo: 6
 
-You can reach me at:
-fingers@mail.planetquake.com
+Health: 300
 
-**CONTRIBUTING
+Armour: 10
+
+## Contacting
+
+You can reach me at fingers@mail.planetquake.com
+
+## Contributing
 
 AirQuake is officially "finished" (or "discontinued"). This means I do not make
 regular updates or take bug reports. If you want to make levels, the specs.txt
@@ -481,7 +527,7 @@ has all the available information on AirQuake entities. Contact the people at
 AQ levels website ( http://www.planetquake.com/airquakelevels/ ) if you need
 help distributing your maps...
 
-**LEGAL STUFF
+## Legal Stuff
 
 You may freely distribute AirQuake in non-commercial electronic formats. This
 includes public ftp- and www-sites and BBS systems, which don't charge money
