@@ -1,8 +1,10 @@
 CC=fteqcc64
 CFLAGS=-Wall -O3
 
+.PHONY: all
 
 all: progs.dat
+	$(MAKE) -C maps
 
 
 progs.dat: $(wildcard qc/*.qc) ./qc/progs.src
@@ -10,8 +12,6 @@ progs.dat: $(wildcard qc/*.qc) ./qc/progs.src
 
 tga2spr:
 	$(CC) tools/tga2spr.c -o tga2spr
-
-.PHONY: all
 
 
 # PAK0

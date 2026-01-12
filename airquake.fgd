@@ -15,10 +15,10 @@
 	_minlight(integer) : "Ambient Light" :  : "Set a global minimum light level(Default 0). While this can help light completey black areas of your map, it can also have unwanted side affects(lost contrast) globally on all of your lights/shadows. Use with caution."
 	_minlight_color(color255) : "Ambient Light Color" :  : "Sets the global minimum light color. Default white(255 255 255)."
 	_minlight_dirt(choices) : "Ambient Light Dirt(AO)" :  : "1 enables dirtmapping (ambient occlusion) on minlight lit surfaces, -1 to disable. Default is to use the value of '_dirt'." = [
-        -1 : "Disabled"
-         0 : "Default"
-         1 : "Enabled"
-    ]
+		-1 : "Disabled"
+		 0 : "Default"
+		 1 : "Enabled"
+	]
 	_range(integer) : "Global Light Range" :  : "Scales the brightness range of all lights without affecting their fade distance. Values more than 0.5 makes lights brighter and values less than 0.5 makes lights less bright. The same effect can be achieved on individual lights by adjusting both the 'light' and 'wait' attributes."
 	_dist(integer) : "Global Light Scale" :  : "Scales the fade distance of all lights by a factor of 'n'. If 'n' is more than 1 lights fade more quickly with distance and if 'n' is less than 1, lights fade more slowly with distance and the light reaches further."
 	_gamma(integer) : "Lightmap gamma" :  : "Adjust brightness of the final lightmap. Default 1, >1 is brighter, <1 is darker."
@@ -79,16 +79,16 @@
 
 //-------- Bounce Lighting Options ---------------
 
-    _bounce(choices) : "Bounce Lighting" :  : "1 enables bounce lighting, default 0." = [
+	_bounce(choices) : "Bounce Lighting" :  : "1 enables bounce lighting, default 0." = [
 		 0 : "Default"
 		 1 : "Enabled"
 	]
-    _bouncescale(integer) : "Bounce Scale" :  : "Scales the brightness of bounce lighting, default 1."
-    _bouncecolorscale(choices) : "Bounce Color" :  : "Weight for bounce lighting to use texture colors from the map. 0 ignores map textures (default), 1 multiplies bounce light color by texture color." = [
+	_bouncescale(integer) : "Bounce Scale" :  : "Scales the brightness of bounce lighting, default 1."
+	_bouncecolorscale(choices) : "Bounce Color" :  : "Weight for bounce lighting to use texture colors from the map. 0 ignores map textures (default), 1 multiplies bounce light color by texture color." = [
 		 0 : "Default"
 		 1 : "Enabled"
 	]
-    _bouncestyled(choices) : "Bounce Styled Lights" :  : "1 makes styled lights bounce (e.g. flickering or switchable lights), default is 0, they do not bounce." = [
+	_bouncestyled(choices) : "Bounce Styled Lights" :  : "1 makes styled lights bounce (e.g. flickering or switchable lights), default is 0, they do not bounce." = [
 		 0 : "Default"
 		 1 : "Enabled"
 	]
@@ -118,20 +118,49 @@
 
 @PointClass base(Monster) size(-16 -16 -20, 16 16 16) model({ "path": ":progs/aagba.mdl" }) = monster_aag : "Anti-aircraft gun" []
 @PointClass
-    size(0 0 0, 32 32 56)
-    base(Appearflags)
-    model(
-        {{
-            style == 1 ->   ":newmedia/f18.md2",
-            style == 3 ->   ":newmedia/f117.md2",
-                            ":newmedia/f16.md2"
-        }}
-    ) =
-    monster_drone2 : "monster_drone2" []
-@PointClass base(Monster) size(-16 -16 -24, 16 16 8) model({ "path": ":newmedia/tankm1.md2" }) = monster_etank : "etank" []
-@PointClass base(Monster) size(-16 -16 -24, 16 16 8) model({ "path": ":progs/msamba.mdl" }) = monster_emsam : "A Tank" []
-@PointClass base(Monster) size(-16 -16 -16, 16 16 16) model({ "path": ":newmedia/apache.md2" }) = monster_helo : "monster_helo" []
+	size(0 0 0, 32 32 56)
+	base(Appearflags)
+	model(
+		{{
+			style == 2 ->   "progs/plane2.mdl",
+			style == 3 ->   "progs/plane3.mdl",
+			style == 4 ->   "progs/plane4.mdl",
+			style == 5 ->   "progs/plane5.mdl",
+							"progs/plane1.mdl"
+		}}
+	) =
+	monster_drone2 : "monster_drone2" []
+@PointClass
+	base(Monster)
+	size(-16 -16 -16, 16 16 16)
+	model({ "path": "progs/plane1.mdl" }) = monster_drone : "Dogfighter" []
 
+@PointClass
+	base(Monster)
+	size(-16 -16 -24, 16 16 8)
+	model({ "path": "progs/msamba.mdl" }) = monster_emsam : "A Tank" []
+@PointClass
+	base(Monster)
+	size(-16 -16 -16, 16 16 16)
+	model({ "path": "progs/helo1.mdl" }) = monster_helo : "monster_helo" []
+@PointClass
+	base(Monster)
+	size(-16 -16 -24, 16 16 8)
+	model({
+		"path": "progs/tankba.mdl"
+	}) = monster_etank : "a Tank" []
+@PointClass
+	base(Monster)
+	size(-16 -16 -20, 16 16 16)
+	model({ "path": "progs/amgba.mdl" }) = monster_amg : "Anti-aircraft gun" []
+@PointClass
+	base(Monster)
+	size(-16 -16 -20, 16 16 16)
+	model({ "path": "progs/samba.mdl" }) = monster_sam : "SAM launcher" []
+@PointClass
+	base(Monster)
+	size(-16 -16 -24, 16 16 16)
+	model({ "path": "progs/radba.mdl" }) = monster_rad : "Radar" []
 
 
 
@@ -142,13 +171,41 @@
 
 
 @SolidClass base(Trigger) = trigger_rearm : "Trigger re-arm" []
+@SolidClass base(Trigger) = trigger_toffrunway : "Use on takeoff runways" []
+@SolidClass base(Trigger) = trigger_landrunway : "Use on landing runways" []
 
 
 
 @PointClass color(200 150 150) = info_cutcam : "info_cutcam" []
-@PointClass color(200 150 150) = info_sky : "info_sky" []
+@PointClass color(200 150 150) = info_sky : "Sets the max altitude of planes." []
+@PointClass color(0 0.5 0) size(-4 -4 -4, 4 4 4) = info_control : "Tower" []
 
 
+
+@PointClass
+	size(-16 -16 -16, 16 16 16)
+	base(Ammo)
+	model({"path": "progs/box1.mdl", "skin": 2}) = item_shells : "rockets" []
+@PointClass
+	size(-16 -16 -16, 16 16 16)
+	base(Ammo)
+	model({"path": "progs/box1.mdl", "skin": 0}) = item_spikes : "nails" []
+@PointClass
+	size(-16 -16 -16, 16 16 16)
+	base(Ammo)
+	model({"path": "progs/box1.mdl", "skin": 1}) = item_rockets : "missiles" []
+@PointClass
+	size(-16 -16 -16, 16 16 16)
+	base(Ammo)
+	model({"path": "progs/box1.mdl", "skin": 3}) = item_cells : "cells" []
+@PointClass
+	size(-16 -16 -16, 16 16 16)
+	base(Ammo)
+	model({"path": "progs/bomb.mdl", "skin": 0}) = item_bombs : "bombs" []
+@PointClass
+	size(-16 -16 -16, 16 16 16)
+	base(Ammo)
+	model({"path": "progs/box1.mdl", "skin": 4}) = item_health : "health" []
 
 
 

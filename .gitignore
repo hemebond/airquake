@@ -6,6 +6,9 @@
 
 # Map files
 *.bsp
+*.lit
+*.prt
+maps/**/*.json
 autosave
 
 # Compiled files
