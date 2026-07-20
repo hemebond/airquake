@@ -2,7 +2,7 @@
 
 by [Iikka Keranen](fingers@mail.planetquake.com) (http://www.planetquake.com/ikq/airquake.htm)
 
-![screenshot](.github/air2_2026-01-12_00-29-11.jpg)
+![screenshot](.github/air2_2026-07-20_18-01-49.jpg)
 
 This is a "total conversion" with players replaced by fighter planes and
 other military vehicles, and monsters replaced by similar vehicles or ground
@@ -26,7 +26,7 @@ They have as good weapons as you...
   `quake/airquake/`
 
 - You can run AirQuake either by running your Quake client with command line
-  parameter `-game airquake` (e.g. `c:\quake>winquake -game airquake`)
+  parameter `-game airquake` (e.g. `winquake -game airquake`)
 
 - Once the game has started and is playing the demos, you can start a game
   from the console (`~` key) by typing: `map <mapname>`, where `<mapname>` is

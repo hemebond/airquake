@@ -1,3 +1,5 @@
+@include "quake.fgd"
+
 @SolidClass = worldspawn : "World entity"
 [
 	message(string) : "Text on entering the world"
@@ -165,7 +167,7 @@
 
 
 @SolidClass base(Appearflags) = func_runway : "Static nonsolid model"  []
-@SolidClass base(Appearflags) = func_xwall : "Static nonsolid model"  []
+@SolidClass base(Appearflags, Targetname, Target) = func_xwall : "Static nonsolid model"  []
 
 
 
@@ -178,7 +180,7 @@
 
 @PointClass color(200 150 150) = info_cutcam : "info_cutcam" []
 @PointClass color(200 150 150) = info_sky : "Sets the max altitude of planes." []
-@PointClass color(0 0.5 0) size(-4 -4 -4, 4 4 4) = info_control : "Tower" []
+@PointClass color(0 0.5 0) size(-4 -4 -4, 4 4 4) base(Targetname, Target)= info_control : "Tower" []
 
 
 
@@ -208,5 +210,24 @@
 	model({"path": "progs/box1.mdl", "skin": 4}) = item_health : "health" []
 
 
-
-@include "quake.fgd"
+@PointClass base(Appearflags, Targetname) size(16 16 16) color(160 192 224) model({
+	"path": model,
+    "skin": skin,
+    "frame": frame
+}) = misc_model :
+"Display a model. Will not be solid! Use clip to block players/monsters, or a func_wall made of skip to block weapons."
+[
+	spawnflags(flags) = [
+		1 : "Trigger Visibility" : 0
+		2 : "Start Invisible" : 0
+		4 : "Play 2nd anim once" : 0
+	]
+	model(string) : "Filename of model (mdl or bsp)"
+	mangle(string) : "Orientation (pitch yaw roll, positive pitch is down)"
+	frame(integer) : "frame of mdl to display" : 0
+	skin(integer) : "skin of mdl to display" : 0
+	ideal_yaw(choices) : "Randomize orientation" = [
+		0 : "Set Orientation"
+		1 : "Random yaw"
+	]
+]

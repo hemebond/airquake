@@ -1,7 +1,7 @@
 # Compiler and flags
 QBSP=qbsp -nolog -nocolor -leaktest -filldetail -litwater -nopercent
 VIS=vis -noambient -nolog -nocolor -nopercent
-LIGHT=light -bounce 1 -dirt -dirtdepth 3 -extra4 -lit -nolog -nocolor -nopercent
+LIGHT=light -bounce 1 -dirt -extra4 -lit -lightgrid -lightgrid_dist 32 32 32 -nolog -nocolor -nopercent
 
 # Directories
 SRC_DIR = maps/src
@@ -15,6 +15,9 @@ BSPS := $(patsubst src/%.map, %.bsp, $(SOURCES))
 .PHONY: all clean
 
 all: $(BSPS)
+
+prefabs.bsp:
+	: do nothing fo $@
 
 %.bsp: src/%.map
 	echo $@
